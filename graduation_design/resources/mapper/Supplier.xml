@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.etimeci.ssm.dao.SupplierDao">
+	<resultMap type="com.etimeci.ssm.entity.Supplier" id="map">
+		<id column="su_id" property="suId"/>
+		<result column="su_name" property="suName"/>
+		<result column="su_address" property="suAddress"/>
+		<result column="su_tel" property="suTel"/>
+		<result column="su_mail" property="suMail"/>
+	</resultMap>
+	
+	
+    <!-- 目的：为dao接口方法提供sql语句配置 -->
+    <insert id="insertSupplier" parameterType="com.etimeci.ssm.entity.Supplier" useGeneratedKeys="true" keyProperty="suId">
+    	insert into t_supplier
+    	(
+    		su_name,
+    		su_address,
+    		su_tel,
+    		su_mail
+    	)
+    	values
+    	(
+    		#{suName},
+    		#{suAddress},
+    		#{suTel},
+    		#{suMail}
+    	)
+    </insert>
+    
+    <select id="query" resultMap="map" >
+    	select 
+    	    su_id,
+    		su_name,
+    		su_address,
+    		su_tel,
+    		su_mail
+    	from t_supplier 
+    	<where>
+    		<if test="suName != null">
+    		 	su_name like concat(concat('%',#{suName}),'%')
+    		</if>
+    		
+    	</where>
+    	</select>
+    
+    
+    
+    
+    
+    <select id="findSupplierById" resultMap="map" >
+    	select 
+    	    su_id,
+    		su_name,
+    		su_address,
+    		su_tel,
+    		su_mail
+    	from t_supplier where su_id =#{suId}
+    		
+    		
+    
+    	</select>
+    	
+    	
+    	
+    	
+    	
+    		
+    	
+    
+     <update id="updateSupplier" parameterType="com.etimeci.ssm.entity.Supplier" >
+    	update t_supplier 
+    	set
+    		su_name=#{suName},
+    		su_address=#{suAddress},
+    		su_tel=#{suTel},
+    		su_mail=#{suMail}
+    	where su_id=#{suId}
+    </update>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <delete id="deleteSupplier" parameterType="com.etimeci.ssm.entity.Supplier" >
+    
+    delete from t_supplier 
+    where su_id=#{suId}
+    
+    </delete>
+    
+    
+</mapper>

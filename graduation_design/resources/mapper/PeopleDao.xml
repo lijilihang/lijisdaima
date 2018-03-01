@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.etimeci.ssm.dao.PeopleDao">
+	<resultMap type="com.etimeci.ssm.entity.Young" id="map1">
+		<id column="y_id" property="yId"/>
+		<result column="y_step" property="yName"/>
+		<result column="y_num" property="yNum"/>
+	</resultMap>
+	<resultMap type="com.etimeci.ssm.entity.Middle" id="map2">
+		<id column="m_id" property="mId"/>
+		<result column="m_step" property="mName"/>
+		<result column="m_num" property="mNum"/>
+	</resultMap>
+	<resultMap type="com.etimeci.ssm.entity.Old" id="map3">
+		<id column="o_id" property="oId"/>
+		<result column="o_step" property="oName"/>
+		<result column="o_num" property="oNum"/>
+	</resultMap>
+	
+  
+    <select id="selectMessageYoung" resultMap="map1" >
+    	
+    	SELECT   y_id,
+    	         y_step,
+    		y_num
+    		FROM z_young;
+   </select>
+   
+   <select id="selectMessageMiddle" resultMap="map2" >
+    	
+    	SELECT   m_id,
+    	         m_step,
+    		m_num
+    		FROM z_middleage;
+   </select>
+   
+   
+   
+   <select id="selectMessageOld" resultMap="map3" >
+    	
+    	SELECT   o_id,
+    	         o_step,
+    		o_num
+    		FROM z_old;
+   </select>
+    
+</mapper>

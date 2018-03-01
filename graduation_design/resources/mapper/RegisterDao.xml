@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.etimeci.ssm.dao.RegisterDao">
+	<resultMap type="com.etimeci.ssm.entity.UserMessage" id="map">
+		<id column="u_id" property="umId"/>
+		<result column="u_phone" property="umPhone"/>
+		<result column="u_password" property="umPassword"/>
+		<result column="u_name" property="umName"/>
+		<result column="u_identify_num" property="umIdentifyNum"/>
+		<result column="u_email" property="umEmail"/>
+		<result column="u_city" property="umCity"/>
+		<result column="u_login_name" property="umLoginName"/>
+		<result column="u_role" property="umRole"/>
+	</resultMap>
+	<resultMap type="com.etimeci.ssm.entity.EchartMapProvance" id="map2">
+		<result column="map_name" property="name"/>
+		<result column="map_value" property="value"/>
+	</resultMap>
+	<resultMap type="com.etimeci.ssm.entity.EchartMapProvance" id="map3">
+		<result column="mapa_name" property="name"/>
+		<result column="mapa_value" property="value"/>
+	</resultMap>
+	
+    <!-- 目的：为dao接口方法提供sql语句配置 -->
+    <insert id="registerInsert" parameterType="com.etimeci.ssm.entity.UserMessage" useGeneratedKeys="true" keyProperty="umId">
+    	insert into z_user
+    	(
+    		
+    		u_phone,
+    		u_password,
+    		u_name,
+    		u_identify_num,
+    		u_email,
+    		u_city,
+    		u_role
+    	)
+    	values
+    	(
+    	    
+    		#{umPhone},
+    		#{umPassword},
+    		#{umName},
+    		#{umIdentifyNum},
+    		#{umEmail},
+    		#{umCity},
+    		1
+    	)
+    </insert>
+    
+    <select id="selectUserAll" resultMap="map" parameterType="com.etimeci.ssm.entity.PageMess">
+    	
+    	SELECT   u_id,
+    	         u_phone,
+    		u_password,
+    		u_name,
+    		u_identify_num,
+    		u_email,
+    		u_city,
+    		u_role,
+    		(SELECT COUNT(u_id)  FROM z_user) AS u_login_name
+    		FROM z_user WHERE u_id LIMIT #{start},#{limit};
+   </select>
+   
+   <select id="selectMapA" resultMap="map2" parameterType="com.etimeci.ssm.entity.EchartMapProvance">
+    	
+    	SELECT
+            map_name,
+            map_value
+            FROM china_map_a;
+   </select>
+   <select id="selectMapB" resultMap="map3" parameterType="com.etimeci.ssm.entity.EchartMapProvance">
+    	
+    	SELECT
+            mapa_name,
+            mapa_value
+            FROM china_map_b;
+   </select>
+   
+   
+   <!-- <insert id="insertUser" parameterType="com.etimeci.ssm.entity.User" useGeneratedKeys="true" keyProperty="userId">
+    	insert into t_user
+    	(
+    		user_name,
+    		password,
+    		true_name,
+    		memo
+    	)
+    	values
+    	(
+    		#{userName},
+    		#{password},
+    		#{trueName},
+    		#{memo}
+    	)
+    	
+    	
+    </insert> -->
+    <update id="updateDataTables" parameterType="com.etimeci.ssm.entity.UserMessage">
+    	UPDATE z_user
+    	 SET 
+    	 u_phone=#{umPhone},
+    	 u_password=#{umPassword},
+    	 u_email=#{umEmail},
+    	 u_city=#{umCity},
+    	 u_name=#{umName}
+    	 WHERE u_id=#{umId}
+    </update>
+    
+    <delete id="deleteDataTables">
+    
+    delete from z_user 
+    where u_id=#{u_id}
+    
+    </delete>
+    
+</mapper>

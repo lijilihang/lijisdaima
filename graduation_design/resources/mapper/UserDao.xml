@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.etimeci.ssm.dao.UserDao">
+	<resultMap type="com.etimeci.ssm.entity.User" id="map">
+		<id column="user_id" property="userId"/>
+		<result column="user_name" property="userName"/>
+		<result column="password" property="password"/>
+		<result column="true_name" property="trueName"/>
+		<result column="memo" property="memo"/>
+	</resultMap>
+	
+    <!-- 目的：为dao接口方法提供sql语句配置 -->
+    <insert id="insertUser" parameterType="com.etimeci.ssm.entity.User" useGeneratedKeys="true" keyProperty="userId">
+    	insert into t_user
+    	(
+    		user_name,
+    		password,
+    		true_name,
+    		memo
+    	)
+    	values
+    	(
+    		#{userName},
+    		#{password},
+    		#{trueName},
+    		#{memo}
+    	)
+    </insert>
+    
+    <select id="query" resultMap="map" >
+    	select 
+    		user_id,
+    		user_name,
+    		password,
+    		true_name,
+    		memo
+    	from t_user 
+    	<where>
+    		<if test="userName != null">
+    		 	user_name like concat(concat('%',#{userName}),'%')
+    		</if>
+    		<if test="trueName != null">
+    			AND true_name like concat(concat('%',#{trueName}),'%')
+    		</if>
+    	</where>
+    	
+    	
+    	 
+    	
+    </select>
+</mapper>
