@@ -54,7 +54,7 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jackson-core-asl-1.9.11.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jackson-databind-2.5.4.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jackson-mapper-asl-1.9.11.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring-data-redis-1.4.1.RELEASE.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jedis-2.9.0.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring-data-redis-1.7.1.RELEASE.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>
