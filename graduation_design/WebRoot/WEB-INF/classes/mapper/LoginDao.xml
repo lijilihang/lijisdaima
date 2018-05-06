@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.etimeci.ssm.dao.LoginDao">
+	<resultMap type="com.etimeci.ssm.entity.UserMessage" id="map">
+		
+		<result column="u_phone" property="umPhone"/>
+		<result column="u_password" property="umPassword"/>
+		
+		<result column="u_email" property="umEmail"/>
+		
+	</resultMap>
+	
+	
+    <!-- 目的：为dao接口方法提供sql语句配置 -->
+     <select id="selectUserName" resultMap="map" parameterType="com.etimeci.ssm.entity.UserMessage">
+    	select u_phone,u_password,u_email from z_user 
+    	where u_phone =#{umPhone} or u_email=#{umEmail}
+   </select>
+    	
+</mapper>

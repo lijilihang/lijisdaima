@@ -1,0 +1,58 @@
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td {
+	margin: 0;
+	padding: 0;
+}
+.userMessageButton {
+	display: none;
+}
+
+.layui-form-item {
+  width: 470px;
+}
+
+.layui-form {
+	width: 60px;
+}
+
+.showPicture{
+	position: absolute;
+	display: block;
+	left: 600px;
+	top: 0px;
+	width: 100px;
+	height: 120px;
+	background-color: #eee;
+}
+
+.picture {
+	position: relative;
+	display: block;
+	top: 50px;
+}
+
+.layui-icon {
+	font-size: 25px;
+}
+
+.banner_s {
+	width: 1100px;
+}
+
+.mainContent {
+  border-top: groove;
+  border-bottom: 0px;
+  border-left: 0px;
+  border-right:0px;
+
+
+}
+
+.passwordDistence{
+	position: relative;
+	margin-top: 20px;
+}
+
+.realNameClass {
+    position: relative;
+	margin-top: 20px;
+}
