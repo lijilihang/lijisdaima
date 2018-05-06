@@ -1,5 +1,28 @@
 package com.etimeci.ssm.entity;
 
+import java.util.Arrays;
+
+/**
+ * 
+ * @author liji
+ *@pramati.  
+ *   umId;//用户id  ==>u_id
+ 	 umPhone;//用户电话   ==>u_id
+	 umPassword;//用户密码  ==>u_phone
+	 umPasswordl;//确认密码  ==>无
+	 umVcode;//验证码 ==>无
+	 umName;//用户真实姓名  ==>u_name
+	 umIdentifyNum;//用户身份证号码   ==>u_identify_num
+	 umEmail;//用户邮箱   ==>u_email
+	 umCity;//所在城市   ==>u_city
+	 umLoginName;//用户名==>无
+	 umRoles;//角色   ==>u_role
+	 umPermissions;//权限  ==>u_permission
+ */
+
+
+
+
 public class UserMessage {
 	private Integer umId;//用户id
 	private String umPhone;//用户电话
@@ -11,8 +34,20 @@ public class UserMessage {
 	private String umEmail;//用户邮箱
 	private String umCity;//所在城市
 	private Integer umLoginName;//用户名
-	private int umRole;//角色
-	
+	private String[] umRole;//角色 
+	private String[] umPermission;//权限s
+	private String[] umRoles;//角色 
+	private String[] umPermissions;//权限s
+
+	public UserMessage() {
+		super();
+	}
+
+	public UserMessage(String umRole, String umPermission) {
+			umRoles = umRole.split(",");
+			umPermissions = umPermission.split(",");
+	}
+
 	public Integer getUmId() {
 		return umId;
 	}
@@ -93,24 +128,46 @@ public class UserMessage {
 		this.umLoginName = umLoginName;
 	}
 
-	public int getUmRole() {
+	public String[] getUmRoles() {
+		return umRoles;
+	}
+
+	public void setUmRoles(String[] umRoles) {
+		this.umRoles = umRoles;
+	}
+
+	public String[] getUmPermissions() {
+		return umPermissions;
+	}
+
+	public void setUmPermissions(String[] umPermissions) {
+		this.umPermissions = umPermissions;
+	}
+	
+	
+
+	public String[] getUmRole() {
 		return umRole;
 	}
 
-	public void setUmRole(int umRole) {
+	public void setUmRole(String[] umRole) {
 		this.umRole = umRole;
+	}
+
+	public String[] getUmPermission() {
+		return umPermission;
+	}
+
+	public void setUmPermission(String[] umPermission) {
+		this.umPermission = umPermission;
 	}
 
 	@Override
 	public String toString() {
 		return "UserMessage [umId=" + umId + ", umPhone=" + umPhone + ", umPassword=" + umPassword + ", umPasswordl="
 				+ umPasswordl + ", umVcode=" + umVcode + ", umName=" + umName + ", umIdentifyNum=" + umIdentifyNum
-				+ ", umEmail=" + umEmail + ", umCity=" + umCity + ", umLoginName=" + umLoginName + ", umRole=" + umRole
-				+ "]";
+				+ ", umEmail=" + umEmail + ", umCity=" + umCity + ", umLoginName=" + umLoginName + ", umRoles="
+				+ Arrays.toString(umRoles) + ", umPermissions=" + Arrays.toString(umPermissions) + "]";
 	}
-	
-	
-	
-	
 
 }

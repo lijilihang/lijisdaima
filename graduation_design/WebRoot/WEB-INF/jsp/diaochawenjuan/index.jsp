@@ -1,12 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
-<title>调查问卷</title>
+<title>首页</title>
 
 
 
@@ -53,7 +53,7 @@ $(window).load(function() {
             		<li><a href="#">在线测评</a></li>
             	</ul>
             </li>
-            <li><a href="${pageContext.request.contextPath}/goProductRegister">产品产品</a>
+            <li><a href="${pageContext.request.contextPath}/goUserMessageList">产品产品</a>
             	<ul class="sub">
             		<li><a href="#">标题一的</a></li>
             		<li><a href="#">标题一的</a></li>
@@ -72,8 +72,16 @@ $(window).load(function() {
             
         </ul>
         <div class="search">
-        	<a href="${pageContext.request.contextPath}/goLogin" class="login_regist">登录</a>
-        	<a href="${pageContext.request.contextPath}/goRegister" class="login_regist">注册</a>
+            <c:if test="${!(empty userMessage.umPhone) }">
+            <a href="#" class="login_regist">${userMessage.umPhone }</a>&nbsp;&nbsp;&nbsp;
+            <a href="${pageContext.request.contextPath}/goLayout" class="login_regist">退出</a>
+            </c:if>
+            <c:if test="${empty userMessage.umPhone }">
+            <a href="${pageContext.request.contextPath}/goLogin" class="login_regist">登录</a>
+            <a href="${pageContext.request.contextPath}/goRegister" class="login_regist">注册</a>
+            </c:if>
+        	
+        	
         	<!--<button type="button">登录</button>
         	<button type="button">注册</button>-->
         </div>

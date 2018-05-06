@@ -1,5 +1,2 @@
-/com/
-/jdbc.properties
-/mapper/
-/mybatis-config.xml
 /spring/
+/redis2.properties

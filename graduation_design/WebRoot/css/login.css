@@ -309,3 +309,7 @@ label.error {
 	-moz-border-radius: 6px;
 	margin: 0 auto;
 }
+
+.registerInput {
+  width: 300px;
+}

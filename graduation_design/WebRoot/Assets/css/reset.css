@@ -66,3 +66,118 @@ abbr, acronym {
 	overflow: hidden;
 }
 /*间隙层结束*/
+
+.mainContent {
+	position: relative;
+	border: groove;
+	
+	height: 700px;
+	width: 100%;
+	background-color: #eee;
+}
+
+.mainContentLeft {
+  position: relative;
+  border: 1px solid #e0e0e0;
+  float: left;
+  width: 200px;
+  height: 500px;
+  margin-left: 20px;
+  margin-top: 30px;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.mainContentRight {
+  position: relative;
+  border: 1px solid #e0e0e0;
+  float: left;
+  /*left: 240px;*/
+  
+  width: 800px;
+  height: 500px;
+  margin-left: 20px;
+  margin-top: 30px;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.messageUl {
+  position: relative;
+  width: 100%;
+}
+
+.messageUl li{
+  position: relative;
+  height: 40px;
+  margin-bottom: 30px;
+  margin-top: 30px;
+  line-height: 40px;
+  text-align: center;
+  width: 100%;
+}
+
+.messageUl li:hover{
+  background: #f6f6f6;
+}
+
+li .selectd {
+  color: #25bb9b;
+}
+
+
+.mainContentRight .basicMessageTitle {
+  position: relative;
+  border-bottom: 1px solid #d4d4d4;
+  margin-left: 20px;
+  margin-top: 20px;
+  width: 750px;
+  height: 39px;
+  text-align: left;
+  font-size: 15px;
+  color: #333;
+}
+
+.basicMessageShow {
+  position: relative;
+  
+  margin-left: 20px;
+  margin-top: 20px;
+  width: 750px;
+  height: 390px;
+  
+}
+
+.basicMessageShow dl dt{
+  position: relative;
+  float: left;
+  left: 50px;
+  font-size: 15px;
+  line-height: 2.0;
+  
+}
+
+.basicMessageShow dl dd{
+  position: relative;
+  margin-top: 30px;
+  left: 0px;
+  color: #999;
+  font-size: 15px;
+  width: 350px;
+  line-height: 2.0;
+  text-align: 20px;
+
+  
+}
+
+.editorMessageEditor {
+	position: relative;
+	left: 560px;
+}
+
+.changeUserMessage {
+	position: relative;
+	width: 600px;
+	margin-left: 40px;
+	margin-top: 20px;
+}

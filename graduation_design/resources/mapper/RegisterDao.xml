@@ -4,15 +4,22 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.etimeci.ssm.dao.RegisterDao">
 	<resultMap type="com.etimeci.ssm.entity.UserMessage" id="map">
+		<!--
 		<id column="u_id" property="umId"/>
-		<result column="u_phone" property="umPhone"/>
-		<result column="u_password" property="umPassword"/>
-		<result column="u_name" property="umName"/>
-		<result column="u_identify_num" property="umIdentifyNum"/>
-		<result column="u_email" property="umEmail"/>
-		<result column="u_city" property="umCity"/>
-		<result column="u_login_name" property="umLoginName"/>
-		<result column="u_role" property="umRole"/>
+				<result column="u_phone" property="umPhone"/>
+				<result column="u_password" property="umPassword"/>
+				<result column="u_name" property="umName"/>
+				<result column="u_email" property="umEmail"/>
+				<result column="u_identify_num" property="umIdentifyNum"/>
+				<result column="u_address" property="umAddress"/>
+				<result column="u_birthday" property="umBirthday"/>
+				<result column="u_state" property="umState"/>
+				<result column="u_photo_path" property="umPhotoPath"/>
+				<result column="u_register_date" property="umRegisterDate" />
+				<result column="u_delete_date" property="umDeleteDate"/>
+				<result column="u_role" property="umRole"/>
+				<result column="u_permission" property="umPermission"/>-->
+		
 	</resultMap>
 	<resultMap type="com.etimeci.ssm.entity.EchartMapProvance" id="map2">
 		<result column="map_name" property="name"/>

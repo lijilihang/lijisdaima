@@ -15,37 +15,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <link rel="icon" href="images/logo.ico">
-<title>新广货运联盟-注册页面</title>
+<title>调查问卷系统-注册页面</title>
 <link rel="stylesheet" href="css/login.css" />
 <body>
 <div class="register-container">
-	<h1>注册</h1>
+	<h1>注册</h1>   
 	<form action="${pageContext.request.contextPath }/register" method="post" id="registerForm" onsubmit="">
     	<div>
-			<input type="text" name="umPhone" class="umPhone" placeholder="输入手机号码" id="umPhone2"/>
+			<input type="text" name="umPhone" class="registerInput" placeholder="输入手机号码" id="umPhone2"/>
 		</div>
-        <div>
-			<input type="password" name="umPassword" class="umPassword" id="umPassword2" placeholder="输入密码" oncontextmenu="return false" onpaste="return false" />
-		</div>
-		<div>
-			<input type="password" name="umPasswordl" class="umPasswordl" id="unPassworda2" placeholder="再次输入密码" oncontextmenu="return false" onpaste="return false" />
+	       <div>
+			<input type="password" name="umPassword" class="registerInput" id="umPassword2" placeholder="输入密码" oncontextmenu="return false" onpaste="return false" />
 		</div>
 		<div>
-			<input type="text" name="umName" class="umName" placeholder="真实姓名" id="umName2" autocomplete="off"/>
+			<input type="password" name="umPasswordl" class="registerInput" id="unPassworda2" placeholder="再次输入密码" oncontextmenu="return false" onpaste="return false" />
 		</div>
-        <div>
-			<input type="text" name="umIdentifyNum" class="umIdentifyNum" id="umIdentifyNum2" placeholder="输入身份证号码" oncontextmenu="return false" onpaste="return false" />
-		</div>
-		<div>
-			<input type="email" name="umEmail" class="umEmail" id="umEmail2" placeholder="输入邮箱地址" oncontextmenu="return false" onpaste="return false" />
-		</div>
+
+
        <!--  <div>
 			<input type="email" name="email" class="email" placeholder="输入手机验证码" oncontextmenu="return false" onpaste="return false" style="width:170px;" />
             <button type="button" style="width:90px;">点击获取</button>
 		</div> -->
-        <div>
-        	<input type="text" name="umCity" id="umCity2" placeholder="输入所在城市 选填">
-        </div>
        <!--  <div>
 			<input type="text" name="cell_number" class="cell_number" placeholder="输入座机号码 选填" autocomplete="off" id="number"/>
 		</div> -->
