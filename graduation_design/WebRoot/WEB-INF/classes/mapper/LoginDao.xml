@@ -15,7 +15,7 @@
 	
     <!-- 目的：为dao接口方法提供sql语句配置 -->
      <select id="selectUserName" resultMap="map" parameterType="com.etimeci.ssm.entity.UserMessage">
-    	select u_phone,u_password,u_email from z_user 
+    	select u_phone,u_password,u_email from z_user
     	where u_phone =#{umPhone} or u_email=#{umEmail}
    </select>
     	

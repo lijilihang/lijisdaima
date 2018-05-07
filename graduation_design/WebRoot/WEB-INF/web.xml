@@ -2,12 +2,7 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
   <display-name>graduation_design</display-name>
   <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
     <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   <servlet>
     <servlet-name>seckill-dispatcher</servlet-name>
@@ -44,6 +39,30 @@
   </filter>
   <filter-mapping>
     <filter-name>characterEncodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+
+
+  <filter>
+    <display-name> AppContextFilter</display-name>
+    <filter-name>AppContextFilter</filter-name>
+    <filter-class>com.etimeci.ssm.filter.AppContextFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>AppContextFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <filter>
+    <filter-name>SessionFilter</filter-name>
+    <filter-class>com.etimeci.ssm.filter.SessionFilter</filter-class>
+    <init-param>
+      <param-name>notNeedLoginPages</param-name>
+      <param-value>,goLogin,goRegister,vcode,goIndexRegister1,loginValidate,register,goResuccess</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>SessionFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
   

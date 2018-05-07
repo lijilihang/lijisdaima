@@ -25,7 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<input type="text" name="umPhone" class="registerInput" placeholder="输入手机号码" id="umPhone2"/>
 		</div>
 	       <div>
-			<input type="password" name="umPassword" class="registerInput" id="umPassword2" placeholder="输入密码" oncontextmenu="return false" onpaste="return false" />
+			<input type="password" name="umPassword" class="registerInput pass" id="umPassword2" placeholder="输入密码" oncontextmenu="return false" onpaste="return false" />
 		</div>
 		<div>
 			<input type="password" name="umPasswordl" class="registerInput" id="unPassworda2" placeholder="再次输入密码" oncontextmenu="return false" onpaste="return false" />

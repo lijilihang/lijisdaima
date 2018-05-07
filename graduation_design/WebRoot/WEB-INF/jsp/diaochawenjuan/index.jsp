@@ -81,7 +81,6 @@ $(window).load(function() {
             <a href="${pageContext.request.contextPath}/goRegister" class="login_regist">注册</a>
             </c:if>
         	
-        	
         	<!--<button type="button">登录</button>
         	<button type="button">注册</button>-->
         </div>

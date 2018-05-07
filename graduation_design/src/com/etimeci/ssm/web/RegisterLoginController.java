@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -59,10 +59,14 @@ public class RegisterLoginController {
 
     // 注册成功
     @RequestMapping("/register")
-    public String Register(UserMessage userMessage) {
-        if (userMessage.getUmPhone() != "" && userMessage.getUmPassword() != "" && userMessage.getUmIdentifyNum() != ""
+    public String Register(UserMessage userMessage, HttpSession session) {
+        if (userMessage.getUmPhone() != "" && userMessage.getUmPassword() != ""
                 && userMessage.getUmPassword().equals(userMessage.getUmPasswordl())) {
             registerService.registerInsert(userMessage);
+            userMessage.setUmPassword("");
+            userMessage.setUmPasswordl("");
+            session.setAttribute("user", userMessage);
+
             return "redirect:/goResuccess";
         } else {
             return null;
@@ -75,28 +79,18 @@ public class RegisterLoginController {
     }
 
     @RequestMapping("/goResuccess") // 注册成功，中间页面
-    public String goResuccess() {
-        return "registerSystem/registerSuccess";
+    public ModelAndView goResuccess(HttpSession session) {
+        ModelAndView mv = new ModelAndView();
+        UserMessage userMessage = (UserMessage) session.getAttribute("user");
+        mv.addObject("userMessage", userMessage);
+        mv.setViewName("/diaochawenjuan/index");
+        return mv;
     }
 
     // 调到登陆页面
     @RequestMapping("/goLogin")
     public String goLogin() {
         return "registerSystem/login";
-    }
-
-    @RequestMapping("/login") // 触发登录
-
-    public ModelAndView login(@RequestParam(required = true, defaultValue = "4") Integer pageSize, String suName) {
-        ModelAndView mv = new ModelAndView();
-        mv.addObject("suName", suName);
-        mv.setViewName("/sysmgr/supplier_list");
-        return mv;
-    }
-
-    @RequestMapping("/goMyjsp") // 测试页面
-    public String goMyjsp() {
-        return "registerSystem/MyJsp";
     }
 
     @RequestMapping(value = "/helloliji") // 测试ajax请求，返回json
@@ -134,7 +128,7 @@ public class RegisterLoginController {
     }
 
     // 登录用户名密码验证，并登陆
-    @RequestMapping(value = "/loginValidate")
+    @RequestMapping(value = "/loginValidate",method = RequestMethod.GET)
     @ResponseBody
     public List<Map<String, Boolean>> loginValidate(UserMessage userMessage, HttpSession session) throws IOException {
         List<Map<String, Boolean>> list = new ArrayList<Map<String, Boolean>>();
@@ -160,7 +154,8 @@ public class RegisterLoginController {
                         map.put("umPhone", true);
                         map.put("umPassword", true);
                         map.put("vcode", true);
-                        session.setAttribute("userMessage", userMessage);
+                        userMessage.setUmPassword("");
+                        session.setAttribute("user", userMessage);
                         list.add(map);
                         return list;
                     } else {
@@ -215,7 +210,10 @@ public class RegisterLoginController {
     @RequestMapping("/goLayout")
     public ModelAndView goLayout(HttpSession session) {
         ModelAndView mv = new ModelAndView();
-        session.setAttribute("userMessage", null);
+        UserMessage userMessage = (UserMessage)session.getAttribute("user");
+        userMessage.setUmPhone("");
+        userMessage.setUmEmail("");
+        session.setAttribute("userMessage", userMessage);
         mv.setViewName("/registerSystem/login");
         return mv;
     }

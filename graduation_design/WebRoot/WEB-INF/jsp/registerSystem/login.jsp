@@ -12,7 +12,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <link rel="icon" href="images/logo.ico">
-<title>新广货运联盟-登录页面</title>
+<title>调查问卷-登录页面</title>
 <link rel="stylesheet" href="css/login.css" />
 <body>
 	<div class="login-container">

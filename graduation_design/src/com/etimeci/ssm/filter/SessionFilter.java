@@ -50,7 +50,6 @@ public class SessionFilter implements Filter {
             if (page.equals(requestedUri)) {
                 isAllow = true;
                 break;
-
             }
 
             if (requestedUri.endsWith(".css") || requestedUri.endsWith(".js") || requestedUri.endsWith(".png") || requestedUri.endsWith(".jpg")) {
@@ -66,7 +65,7 @@ public class SessionFilter implements Filter {
             UserMessage user = (UserMessage) session.getAttribute("user");
 
             if (user == null) {
-                response.sendRedirect(request.getContextPath() + "/LoginGetServlet");
+                response.sendRedirect(request.getContextPath() + "/goLogin");
             } else {
                 filterChain.doFilter(request, response);
             }

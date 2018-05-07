@@ -48,7 +48,7 @@ public class AppContextFilter implements Filter {
         appContext.addObject("APP_CONTEXT_RESPONSE", response);
         servletResponse.setContentType("text/html;charset=utf-8");
         HttpSession session = request.getSession();
-        UserMessage user = (UserMessage) session.getAttribute("USER");
+        UserMessage user = (UserMessage) session.getAttribute("user");
         appContext.addObject("APP_CONTEXT_USER", user);
         appContext.addObject("APP_CONTEXT_SESSION", session);
 
