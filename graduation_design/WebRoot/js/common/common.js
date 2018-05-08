@@ -1,0 +1,1 @@
+window.getUserMesssagePath = "${pageContext.request.contextPath }/validRegister";

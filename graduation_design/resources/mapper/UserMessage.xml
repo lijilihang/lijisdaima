@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.etimeci.ssm.dao.UserMessageDao">
+    <resultMap type="com.etimeci.ssm.entity.UserMessage" id="map">
+        <id column="u_id" property="umId"/>
+        <result column="u_nickname" property="umNickName"/>
+        <result column="u_phone" property="umPhone"/>
+        <result column="u_email" property="umEmail"/>
+        <result column="u_address" property="umAddress"/>
+        <result column="u_birthday" property="umBirthday"/>
+    </resultMap>
+    
+    <!-- 目的：为dao接口方法提供sql语句配置 -->
+    <!-- <insert id="insertUser" parameterType="com.etimeci.ssm.entity.User" useGeneratedKeys="true" keyProperty="userId">
+        insert into t_user
+        (
+            user_name,
+            password,
+            true_name,
+            memo
+        )
+        values
+        (
+            #{userName},
+            #{password},
+            #{trueName},
+            #{memo}
+        )
+    </insert> -->
+    <select id="queryUserMessage" resultMap="map" >
+        select 
+            u_id,
+            u_nickname,
+            u_phone,
+            u_email,
+            u_address,
+            u_birthday
+        from z_user
+        <where>
+             u_id = #{userId}
+        </where>
+    </select>
+</mapper>
