@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -23,6 +24,7 @@ import com.etimeci.ssm.entity.Login;
 import com.etimeci.ssm.entity.UserMessage;
 import com.etimeci.ssm.service.LoginService;
 import com.etimeci.ssm.service.RegisterService;
+import com.etimeci.ssm.util.StringUtil;
 
 @Controller
 public class RegisterLoginController {
@@ -63,10 +65,12 @@ public class RegisterLoginController {
         if (userMessage.getUmPhone() != "" && userMessage.getUmPassword() != ""
                 && userMessage.getUmPassword().equals(userMessage.getUmPasswordl())) {
             registerService.registerInsert(userMessage);
+            List<UserMessage> list1 = loginService.selectUserName(userMessage);
+            userMessage.setUmId(list1.get(0).getUmId());
             userMessage.setUmPassword("");
             userMessage.setUmPasswordl("");
-            session.setAttribute("user", userMessage);
 
+            session.setAttribute("user", userMessage);
             return "redirect:/goResuccess";
         } else {
             return null;
@@ -89,8 +93,19 @@ public class RegisterLoginController {
 
     // 调到登陆页面
     @RequestMapping("/goLogin")
-    public String goLogin() {
-        return "registerSystem/login";
+    public ModelAndView goLogin(@RequestParam(value="go",required=false,defaultValue="") String go, HttpSession session) {
+        UserMessage userMessage = (UserMessage) session.getAttribute("user");
+        ModelAndView mv = new ModelAndView();
+        if (userMessage != null && StringUtil.isNotEmpty(userMessage.getUmPhone())) {
+            mv.addObject("userMessage", session.getAttribute("user"));
+            mv.setViewName("/diaochawenjuan/index");
+            return mv;
+        } else {
+            mv.addObject("go", go);
+            mv.setViewName("/registerSystem/login");
+            return mv;
+        }
+        //return "registerSystem/login";
     }
 
     @RequestMapping(value = "/helloliji") // 测试ajax请求，返回json
@@ -98,10 +113,10 @@ public class RegisterLoginController {
     public Map<String, UserMessage> hello(HttpServletResponse response) throws IOException {
         UserMessage u1 = new UserMessage();
         u1.setUmPhone("123456");
-        u1.setUmCity("liji");
+
         UserMessage u2 = new UserMessage();
         u2.setUmPhone("654321");
-        u2.setUmCity("jiki");
+
         Map<String, UserMessage> map = new HashMap<String, UserMessage>();
         map.put("name", u1);
         map.put("city", u2);
@@ -155,6 +170,7 @@ public class RegisterLoginController {
                         map.put("umPassword", true);
                         map.put("vcode", true);
                         userMessage.setUmPassword("");
+                        userMessage.setUmId(list1.get(0).getUmId());
                         session.setAttribute("user", userMessage);
                         list.add(map);
                         return list;
@@ -211,6 +227,7 @@ public class RegisterLoginController {
     public ModelAndView goLayout(HttpSession session) {
         ModelAndView mv = new ModelAndView();
         UserMessage userMessage = (UserMessage)session.getAttribute("user");
+        userMessage.setUmId(-1);
         userMessage.setUmPhone("");
         userMessage.setUmEmail("");
         session.setAttribute("userMessage", userMessage);

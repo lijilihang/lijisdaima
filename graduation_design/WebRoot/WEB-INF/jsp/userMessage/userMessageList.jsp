@@ -11,6 +11,7 @@
 <script type="text/javascript" src="Assets/js/jquery-1.8.3.min.js"></script>
 <link rel="stylesheet" type="text/css" href="js/layui/css/layui.css">
 <script type="text/javascript" src="js/layui/layui.js"></script>
+<script type="text/javascript" src="js/vue/vue.js"></script>
 
 
 <link rel="stylesheet" type="text/css" href="Assets/plugins/FlexSlider/flexslider.css">
@@ -153,7 +154,7 @@ $(window).load(function() {
       
       
       
-  <div class="changeUserMessage" style="display: ">
+  <div class="changeUserMessage" style="display: " id="userMessages">
 		  <form class="layui-form" action="">
 		  
 		 <div class="showPicture">
@@ -165,21 +166,21 @@ $(window).load(function() {
 		    <div class="layui-form-item">
 		      <label class="layui-form-label">我的昵称:</label>
 		    <div class="layui-input-block">
-		      <input type="text" name="title" id="userNameId" disabled="disabled" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
+		      <input type="text" name="title" v-model="userNameId" id="userNameId" disabled="disabled" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
 		    </div>
 		    </div>
 
 		     <div class="layui-form-item">
 		      <label class="layui-form-label">电话:</label>
 		      <div class="layui-input-block">
-		      <input type="text" name="username" id="phoneNumber" disabled="disabled" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+		      <input type="text" name="username" v-model="phoneNumber" id="phoneNumber" disabled="disabled" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
 		      </div>
 		    </div>
 		    
 		    <div class="layui-form-item">
 		      <label class="layui-form-label">邮箱:</label>
 		      <div class="layui-input-block">
-		      <input type="text" name="username" id="userEmail" disabled="disabled" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+		      <input type="text" name="username" v-model="userEmail" id="userEmail" disabled="disabled" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
 		      </div>
 		    </div>
 		    
@@ -187,13 +188,13 @@ $(window).load(function() {
 		    <div class="layui-form-item">
 		      <label class="layui-form-label">我的地址:</label>
 		      <div class="layui-input-block">
-		      <input type="text" name="username"  id="userAddress" disabled="disabled" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+		      <input type="text" name="username" v-model="userAddress" id="userAddress" disabled="disabled" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
 		      </div>
 		    </div>
 		    <div class="layui-form-item">
 		      <label class="layui-form-label">生日:</label>
 		      <div class="layui-input-block">
-		      <input type="text" name="username" id="userBirthday" disabled="disabled" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+		      <input type="text" name="username" v-model="userBirthday" id="userBirthday" disabled="disabled" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
 		      </div>
 		    </div>
   
@@ -207,29 +208,6 @@ $(window).load(function() {
 	</form>
 
   </div>
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
       
       <div class="basicMessageShow" style="display: none">
       
@@ -298,6 +276,11 @@ $(window).load(function() {
         </div>
     </div>
 </div>
+<script type="text/javascript">
+  window.getUserMesssagePath = "${pageContext.request.contextPath }/selectUserMessage";
+  window.changeUserMessage = "${pageContext.request.contextPath }/selectUserMessage";
+</script>
 <script type="text/javascript" src="js/question/userMessage.js"></script>
+<script type="text/javascript" src="js/vue/userMessageVue.js"></script>
 </body>
 </html>

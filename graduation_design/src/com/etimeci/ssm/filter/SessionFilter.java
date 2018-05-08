@@ -46,7 +46,6 @@ public class SessionFilter implements Filter {
         boolean isAllow = false;
 
         for (String page : pages) {
-
             if (page.equals(requestedUri)) {
                 isAllow = true;
                 break;
@@ -64,8 +63,12 @@ public class SessionFilter implements Filter {
             HttpSession session = request.getSession();
             UserMessage user = (UserMessage) session.getAttribute("user");
 
-            if (user == null) {
-                response.sendRedirect(request.getContextPath() + "/goLogin");
+            if (user == null || "".equals(user.getUmPhone()) || user.getUmPhone() == null ) {
+                if (request.getMethod().toLowerCase().equals("get")) {
+                    response.sendRedirect(request.getContextPath() + "/goLogin?go=" + requestedUri);
+                } else {
+                    response.sendRedirect(request.getContextPath() + "/goLogin");
+                }
             } else {
                 filterChain.doFilter(request, response);
             }

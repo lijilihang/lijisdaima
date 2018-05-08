@@ -54,7 +54,7 @@
             u_name,
             u_identify_num,
             u_email,
-            u_city,
+            u_address,
             u_role,
             (SELECT COUNT(u_id)  FROM z_user) AS u_login_name
             FROM z_user WHERE u_id LIMIT #{start},#{limit};

@@ -39,7 +39,7 @@ $(document).ready(function() {
       data : {
         "umPhone" : $("#number1").val(),
         "umPassword" : $("#umPassword1").val(),
-        "umVcode" : $("#vcode").val()
+        "umVcode" : $("#vcode").val(),
       },
       dataType: "json",//服务器返回的数据类
       success : function(data) {

@@ -1,5 +1,7 @@
 package com.etimeci.ssm.common;
 
+
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,7 +42,6 @@ public class AppContext {
             appContext = new AppContext();
             appContextMap.set(appContext);
         }
-
         return appContextMap.get();
     }
 
