@@ -6,6 +6,8 @@ new Vue({
     userEmail: '',
     userAddress: '',
     userBirthday: '',
+    imagePath: '',
+    formData: new FormData(),
   },
   created: function() {
     this.getUserMessage();
@@ -30,20 +32,62 @@ new Vue({
     changeUserMessage: function() {
       var vueBody = this;
       $.ajax({
-        url: changeUserMessage,
+        url: changeUserMessagePath,
         type: 'POST',
         data: {
-          userNameId: this.userNameId,
-          phoneNumber: this.phoneNumber,
-          userEmail: this.userEmail,
-          userAddress: this.userAddress,
-          userBirthday: this.userBirthday,
+          umNickName: this.userNameId,
+          umPhone: this.phoneNumber,
+          umEmail: this.userEmail,
+          umAddress: this.userAddress,
+          umBirthday: this.userBirthday,
         },
         dataType: 'JSON',
         success: function(data) {
+          vueBody.getUserMessage();
+        },
+      })
+    },
+    onPictureChange(e) {
+      this.el = e;
+      var files = e.target.files || e.dataTransfer.files;
+      var imageType = /^image\//;
+      if (!files.length) {
+        return;
+      }
+      this.createImage(files[0]);
+    },
+    onPictureChange(e) {
+      this.el = e;
+      var files = e.target.files || e.dataTransfer.files;
+      var imageType = /^image\//;
+      if (!files.length) {
+        return;
+      }
+      this.createImage(files[0]);
+    },
+    createImage(file) {
+      var reader = new FileReader();
+      this.formData.append("file", file);
+      var that = this;
+      reader.onload = (e) => {
+        that.imagePath = e.target.result;
+      };
+      reader.readAsDataURL(file);
+      
+      var data = this.formData;
+      var ss= data.get("file");
+      var vueBody = this;
+      $.ajax({
+        url: changeImage,
+        type: 'POST',
+        data: data,
+        contentType: false,//没有设置任何内容类型头信息
+        processData: false,
+        dataType:"JSON",
+        success: function(result) {
           
         },
       })
-    }
+    },
   }
 })

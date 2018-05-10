@@ -53,12 +53,13 @@ $(window).load(function() {
             		<li><a href="#">在线测评</a></li>
             	</ul>
             </li>
-            <li><a href="${pageContext.request.contextPath}/goUserMessageList">产品产品</a>
-            	<ul class="sub">
-            		<li><a href="#">标题一的</a></li>
-            		<li><a href="#">标题一的</a></li>
-            		<li><a href="#">标题三的</a></li>
-            	</ul>
+             <li><a href="${pageContext.request.contextPath}/goUserMessageList">我的账户</a>
+                <ul class="sub">
+                    <li><a href="${pageContext.request.contextPath}/goUserMessageList">基本资料</a></li>
+                    <li><a href="${pageContext.request.contextPath}/goChangPassword">修改密码</a></li>
+                    <li><a href="${pageContext.request.contextPath}/goRealName">实名认证</a></li>
+                    <li><a href="${pageContext.request.contextPath}/goSetUp">个人设置</a></li>
+                </ul>
             </li>
             <li><a href="${pageContext.request.contextPath}/goServiceRegister">服务支持</a>
             	<ul class="sub">

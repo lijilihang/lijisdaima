@@ -32,4 +32,30 @@ public class UserServiceImpl implements UserService {
     public List<UserMessage> queryUserMessage(Integer userId) {
         return userMessageDao.queryUserMessage(userId);
     }
+
+    @Override
+    public Boolean updateUserMessage(UserMessage message) {
+        return userMessageDao.updateUserMessage(message);
+    }
+
+    @Override
+    public String selectUserPasssord(Integer userId) {
+        return userMessageDao.selectUserPasssord(userId);
+    }
+
+    @Override
+    public Boolean updatePassword(Integer userId, String newPassword) {
+        Boolean updatePasswordVal = userMessageDao.updatePassword(userId, newPassword);
+        return updatePasswordVal;
+    }
+
+    @Override
+    public List<UserMessage> queryRealNameMessage(Integer userId) {
+        return userMessageDao.queryRealNameMessage(userId);
+    }
+
+    @Override
+    public Boolean updateRealNameMessage(UserMessage message) {
+        return userMessageDao.updateRealNameMessage(message);
+    }
 }

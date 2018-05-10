@@ -9,8 +9,10 @@
 <title>问卷服务</title>
 <link rel="stylesheet" type="text/css" href="Assets/css/reset.css"/>
 <script type="text/javascript" src="Assets/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="js/layer/layer.js"></script>
 <link rel="stylesheet" type="text/css" href="js/layui/css/layui.css">
 <script type="text/javascript" src="js/layui/layui.js"></script>
+<script type="text/javascript" src="js/vue/vue.js"></script>
 
 
 <link rel="stylesheet" type="text/css" href="Assets/plugins/FlexSlider/flexslider.css">
@@ -52,12 +54,13 @@ $(window).load(function() {
             		
             	</ul>
             </li>
-            <li class="now"><a href="${pageContext.request.contextPath}/goUserMessageList">个人主页</a>
-            	<ul class="sub">
-            		<li><a href="#">基本资料</a></li>
-            		<li><a href="#">修改资料</a></li>
-            		<li><a href="#">个人设置</a></li>
-            	</ul>
+            <li class="now"><a href="${pageContext.request.contextPath}/goUserMessageList">我的账户</a>
+                <ul class="sub">
+                    <li><a href="${pageContext.request.contextPath}/goUserMessageList">基本资料</a></li>
+                    <li><a href="${pageContext.request.contextPath}/goChangPassword">修改密码</a></li>
+                    <li><a href="${pageContext.request.contextPath}/goRealName">实名认证</a></li>
+                    <li><a href="${pageContext.request.contextPath}/goSetUp">个人设置</a></li>
+                </ul>
             </li>
             <li><a href="${pageContext.request.contextPath}/goServiceRegister">服务支持</a>
             	<ul class="sub">
@@ -147,43 +150,36 @@ $(window).load(function() {
                      实名认证
       </div>
 
-  <div class="changeUserMessage" style="display: ">
+  <div class="changeUserMessage" style="display: " id="realName">
 		  <div class="realNameClass">
 	          <label class="layui-form-label">真实姓名：</label>
 	          <div class="layui-input-block">
-	            <input type="text" name="text" required="" lay-verify="required" placeholder="请输入真实姓名" autocomplete="off" class="layui-input">
+	            <input type="text" name="text" v-model="trueName" required="" lay-verify="required" placeholder="请输入真实姓名" autocomplete="off" class="layui-input">
 	          </div>
           </div>
           <div class="realNameClass">
 	          <label class="layui-form-label">电话号码：</label>
 	          <div class="layui-input-block">
-	            <input type="text" name="text" required="" lay-verify="required" placeholder="请输入电话号码" autocomplete="off" class="layui-input">
+	            <input type="text" name="text" v-model="myPhone" required="" lay-verify="required" placeholder="请输入电话号码" autocomplete="off" class="layui-input">
 	          </div>
           </div>
           <div class="realNameClass">
 	          <label class="layui-form-label">身份证号：</label>
 	          <div class="layui-input-block">
-	            <input type="text" name="text" required="" lay-verify="required" placeholder="请输入您的身份证号码" autocomplete="off" class="layui-input">
+	            <input type="text" name="text" v-model="idetifyNumber" required="" lay-verify="required" placeholder="请输入您的身份证号码" autocomplete="off" class="layui-input">
 	          </div>
           </div>
           <div class="realNameClass">
 	          <label class="layui-form-label">电子邮箱：</label>
 	          <div class="layui-input-block">
-	            <input type="text" name="text" required="" lay-verify="required" placeholder="请输入您的电子邮箱" autocomplete="off" class="layui-input">
+	            <input type="text" name="text" v-model="email" required="" lay-verify="required" placeholder="请输入您的电子邮箱" autocomplete="off" class="layui-input">
 	          </div>
           </div>
-          
-        
-          
-          <div class="layui-input-block" style="margin-top: 40px;">
-		      <button class="layui-btn userMessageButton" style="display: inline-block;" id="submitAllMessage" lay-filter="demo1">立即提交</button>
-		      <button type="reset" style="display: inline-block;" class="layui-btn layui-btn-primary userMessageButton">重置</button>
-	      </div>
-          
-          
-          
-       
 
+          <div class="layui-input-block" style="margin-top: 40px;">
+		      <button class="layui-btn userMessageButton" @click="changeRealNameMessage" style="display: inline-block;" id="submitAllMessage" lay-filter="demo1">立即提交</button>
+		      <button type="reset" style="display: inline-block;" @click="resetRealName" class="layui-btn layui-btn-primary userMessageButton">重置</button>
+	      </div>
 
   </div>
 
@@ -255,5 +251,10 @@ $(window).load(function() {
         </div>
     </div>
 </div>
+<script type="text/javascript">
+  window.getRealNameMessagePath = "${pageContext.request.contextPath }/getRealNameMessage";
+  window.changeRealNameMessagePath = "${pageContext.request.contextPath }/changeRealNameMessage";
+</script>
+<script type="text/javascript" src="js/vue/realNameVue.js"></script>
 </body>
 </html>

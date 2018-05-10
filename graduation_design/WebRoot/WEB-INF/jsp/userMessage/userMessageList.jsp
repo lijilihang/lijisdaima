@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
 <title>问卷服务</title>
 <link rel="stylesheet" type="text/css" href="Assets/css/reset.css"/>
-<script type="text/javascript" src="Assets/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="js/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href="js/layui/css/layui.css">
 <script type="text/javascript" src="js/layui/layui.js"></script>
 <script type="text/javascript" src="js/vue/vue.js"></script>
@@ -53,11 +53,12 @@ $(window).load(function() {
             		
             	</ul>
             </li>
-            <li class="now"><a href="${pageContext.request.contextPath}/goUserMessageList">个人主页</a>
+            <li class="now"><a href="${pageContext.request.contextPath}/goUserMessageList">我的账户</a>
             	<ul class="sub">
-            		<li><a href="#">基本资料</a></li>
-            		<li><a href="#">修改资料</a></li>
-            		<li><a href="#">个人设置</a></li>
+            		<li><a href="${pageContext.request.contextPath}/goUserMessageList">基本资料</a></li>
+            		<li><a href="${pageContext.request.contextPath}/goChangPassword">修改密码</a></li>
+            		<li><a href="${pageContext.request.contextPath}/goRealName">实名认证</a></li>
+            		<li><a href="${pageContext.request.contextPath}/goSetUp">个人设置</a></li>
             	</ul>
             </li>
             <li><a href="${pageContext.request.contextPath}/goServiceRegister">服务支持</a>
@@ -158,8 +159,12 @@ $(window).load(function() {
 		  <form class="layui-form" action="">
 		  
 		 <div class="showPicture">
-		 <div class="picture"><i class="layui-icon">&#xe62f;</i></div>
-		 <div>修改头像</div>
+		 <div class="picture">
+		 <i class="layui-icon">
+		   <input type="file" @change="onPictureChange" id="choosePictures" class="choose"/>&#xe62f;</i>
+		 </div>
+		 <img v-if="imagePath != ''" v-bind:src="imagePath" class="myImage"  />
+		 <div v-if="imagePath == ''">修改头像</div>
 		 </div>
 
 
@@ -201,7 +206,7 @@ $(window).load(function() {
   
 	  <div class="layui-form-item">
 	    <div class="layui-input-block">
-	      <button class="layui-btn userMessageButton" id="submitAllMessage" lay-submit="" lay-filter="demo1">立即提交</button>
+	      <button class="layui-btn userMessageButton" @click="changeUserMessage" id="submitAllMessage" >立即提交</button>
 	      <button type="reset" class="layui-btn layui-btn-primary userMessageButton">重置</button>
 	    </div>
 	  </div>
@@ -271,14 +276,21 @@ $(window).load(function() {
     </div>
     <div class="bq_bg">
     	<div class="bq">
-        	
             <span>版权所有：<a href="http://www.mycodes.net/" target="_blank">Forson Li</a> </span>
         </div>
     </div>
 </div>
 <script type="text/javascript">
   window.getUserMesssagePath = "${pageContext.request.contextPath }/selectUserMessage";
-  window.changeUserMessage = "${pageContext.request.contextPath }/selectUserMessage";
+  window.changeImage = "${pageContext.request.contextPath }/changeImage";
+  window.changeUserMessagePath = "${pageContext.request.contextPath }/changeUserMessage";
+  layui.use('laydate', function(){
+      var laydate = layui.laydate;
+      laydate.render({
+        elem: '#userBirthday'
+      });
+  });
+
 </script>
 <script type="text/javascript" src="js/question/userMessage.js"></script>
 <script type="text/javascript" src="js/vue/userMessageVue.js"></script>
