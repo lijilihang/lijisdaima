@@ -1,0 +1,29 @@
+.examTitleInput {
+  display: inline-block;
+}
+
+.copyLink {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  background-color: #bf0917;
+  color: white;
+}
+
+.submitDiv {
+  text-align: center;
+  width: 100%;
+}
+
+.examTitles {
+  text-align: center;
+  width: 100%;
+}
+
+.mainContent {
+  height: 300px;
+}
+
+.examTitleInput {
+  font-size: 10px;
+}
