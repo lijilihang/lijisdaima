@@ -59,10 +59,11 @@ public class RegisterController {
     }
 
     @RequestMapping("/goSolutionRegister")
-    public String goSolutionRegister(HttpSession session) {
+    public ModelAndView goSolutionRegister(HttpSession session) {
         // registerService.registerInsert(userMessage);
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("userMessage", session.getAttribute("user"));
-        return "diaochawenjuan/solution";
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("userMessage", session.getAttribute("user"));
+        mv.setViewName("/diaochawenjuan/solution");
+        return mv;
     }
 }

@@ -6,13 +6,14 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
-<title>问卷服务</title>
+<title>问卷调研</title>
 <link rel="stylesheet" type="text/css" href="Assets/css/reset.css"/>
 <script type="text/javascript" src="Assets/js/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="Assets/js/js_z.js"></script>
 <link rel="stylesheet" type="text/css" href="Assets/plugins/FlexSlider/flexslider.css">
 <script type="text/javascript" src="Assets/plugins/FlexSlider/jquery.flexslider.js"></script>
 <script type="text/javascript" src="Assets/js/main.js"></script>
+<script type="text/javascript" src="js/question/index.js"></script>
 <link rel="stylesheet" type="text/css" href="Assets/css/thems.css">
 <link rel="stylesheet" type="text/css" href="Assets/css/responsive.css">
 <script language="javascript">
@@ -42,7 +43,7 @@ $(window).load(function() {
             </li>
             <li class="now"><a href="${pageContext.request.contextPath}/goSolutionRegister">问卷服务</a>
             	<ul class="sub">
-            		<li><a href="#">问卷调研</a></li>
+            		<li><a href="${pageContext.request.contextPath}/goCreateExam">问卷调研</a></li>
             		<li><a href="#">在线测评</a></li>
             		
             	</ul>
@@ -68,9 +69,19 @@ $(window).load(function() {
         </ul>
         
         <div class="search">
-        	<input name="" type="text" class="text">
-            <input name="" type="submit" class="btn" value="">
+            <c:if test="${!(empty userMessage.umPhone) }">
+            <a href="#" class="login_regist">${userMessage.umPhone }</a>&nbsp;&nbsp;&nbsp;
+            <a href="${pageContext.request.contextPath}/goLayout" class="login_regist">退出</a>
+            </c:if>
+            <c:if test="${empty userMessage.umPhone }">
+            <a href="${pageContext.request.contextPath}/goLogin" class="login_regist">登录</a>
+            <a href="${pageContext.request.contextPath}/goRegister" class="login_regist">注册</a>
+            </c:if>
+            
+            <!--<button type="button">登录</button>
+            <button type="button">注册</button>-->
         </div>
+        
         <div class="nav_m">
         	<span class="n_icon">&nbsp;</span>
             <ul>
@@ -88,38 +99,42 @@ $(window).load(function() {
 <!--幻灯片-->
 <!--幻灯片-->
 
-<div class="banner banner_s"><h1 class="hh">问卷服务</h1></div>
+<div class="banner banner_s"><h1 class="hh">问卷调研</h1></div>
 
 
 <!-- 中心 -->
 <div class="box_m">
-    	<ul class="solution i_solution clearfix">
-        	<li>
-            	<div class="l_up">
-                    <div class="tu"><img src="Assets/images/icon2.png" alt=""/></div>
-                    <div class="title">互联网视频流媒体系统</div>
-                    <div class="more"><a href="solution.html"><img src="Assets/images/icon1.png" alt=""/></a></div>
-                </div>
-                <div class="l_dn">
-                    <div class="l_line"><span>&nbsp;</span></div>
-                    <p>提供了一个开放的应用上传，发布，交流，分享的网络平台，打造更加便利的电视应用生态圈。</p>
-                    <a href="">MORE</a>
-				</div>
-            </li>
+
+
+    <div class="box_m">
+        <ul class="solution i_solution clearfix">
             <li>
-            	<div class="l_up">
+                <div class="l_up">
                     <div class="tu"><img src="Assets/images/icon3.png" alt=""/></div>
-                    <div class="title">OTT综合业务管理系统</div>
-                    <div class="more"><a href=""><img src="Assets/images/icon1.png" alt=""/></a></div>
+                    <div class="title">创建问卷</div>
+                    <div class="more"><a href="${pageContext.request.contextPath}/goCreateExam"><img src="Assets/images/icon1.png" alt=""/></a></div>
                 </div>
                 <div class="l_dn">
                     <div class="l_line"><span>&nbsp;</span></div>
-                    <p>提供了一个开放的应用上传，发布，交流，分享的网络平台，打造更加便利的电视应用生态圈。</p>
-                    <a href="">MORE</a>
-				</div>
+                    <p>我们提供了各种创建问卷的方式让你选择,给您拥有很好的用户体验</p>
+                    <a href="#"></a>
+                </div>
             </li>
             <li>
-            	<div class="l_up">
+                <div class="l_up">
+                    <div class="tu"><img src="Assets/images/icon2.png" alt=""/></div>
+                    <div class="title">我的问卷</div>
+                    <div class="more"><a href="${pageContext.request.contextPath}/goExamList"><img src="Assets/images/icon1.png" alt=""/></a></div>
+                </div>
+                <div class="l_dn">
+                    <div class="l_line"><span>&nbsp;</span></div>
+                    <p>您创建的所有问卷都将在这里</p>
+                    <a href="">MORE</a>
+                </div>
+            </li>
+
+            <li>
+                <div class="l_up">
                     <div class="tu"><img src="Assets/images/icon4.png" alt=""/></div>
                     <div class="title">广告业务管理系统</div>
                     <div class="more"><a href=""><img src="Assets/images/icon1.png" alt=""/></a></div>
@@ -128,10 +143,10 @@ $(window).load(function() {
                     <div class="l_line"><span>&nbsp;</span></div>
                     <p>提供了一个开放的应用上传，发布，交流，分享的网络平台，打造更加便利的电视应用生态圈。</p>
                     <a href="">MORE</a>
-				</div>
+                </div>
             </li>
             <li>
-            	<div class="l_up">
+                <div class="l_up">
                     <div class="tu"><img src="Assets/images/icon5.png" alt=""/></div>
                     <div class="title">视频编码系统</div>
                     <div class="more"><a href=""><img src="Assets/images/icon1.png" alt=""/></a></div>
@@ -140,9 +155,13 @@ $(window).load(function() {
                     <div class="l_line"><span>&nbsp;</span></div>
                     <p>提供了一个开放的应用上传，发布，交流，分享的网络平台，打造更加便利的电视应用生态圈。</p>
                     <a href="">MORE</a>
-				</div>
+                </div>
             </li>
         </ul>
+    </div>
+
+
+
     </div>
     
     <!--  -->
