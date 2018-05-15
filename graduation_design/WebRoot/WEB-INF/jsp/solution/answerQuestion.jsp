@@ -33,8 +33,7 @@
 <body>
 
 
-  <form id="form1" method="post"
-    action="https://www.wjx.cn/joinnew/processjq.ashx?curid=23373077">
+  <div id="form1">
 
 
 
@@ -75,7 +74,7 @@
           <p></p>
           <p>&nbsp; &nbsp; &nbsp;
             &nbsp;您好，为了更好的了解大数据环境下公民个人信息保护的现状，更好的保护自身权利和维护他人的利益，特此设计了问卷，对于您的问卷，我会依据国家相关法律法规，做好保密工作，也希望您能够配合和参与，非常感谢。</p>
-          <p>&nbsp; &nbsp; &nbsp; 填写说明：请您将符合您本人情况和意见的答案填写在括号中。</p>
+          <p>&nbsp; &nbsp; &nbsp; 填写说明：请您将符合您本人情况和意见的答案填写在输入框中。</p>
           <p></p>
           <p></p>
         </span>
@@ -99,7 +98,7 @@
           
           
           
-          <div class="field ui-field-contain" id="div1" v-for="item in items">
+          <div class="field ui-field-contain" v-for="item in items">
             <div class="field-label" >
               {{item.title}}
               <span class="req">*</span>
@@ -122,51 +121,12 @@
             </div>
             <div class="errorMessage"></div>
           </div>
-          
-          
-          
-          
-         <!--  <div class="field ui-field-contain" id="div1">
-            <div class="field-label" >
-                                                 您的建议是什么
-              <span class="req">*</span>
-              <span class="qtypetip" >&nbsp;[填空题]</span>
-            </div>
-            <div class="ui-controlgroup">
-              <div class="ui-radio" v-for="perOption in item.option" @click="triggerRadio($event,$index)">
-                <span class="jqradiowrapper">
-                  <input :type="item.type" :value="perOption.id" :name="item.index" class="radioSize">
-                </span>
-                <div class="label" >{{perOption.value}}</div>
-              </div>
-              <textarea rows="" cols="" class="form-control inputArea"></textarea>
-            </div>
-            <div class="errorMessage"></div>
-          </div> -->
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
+
+
           
           
         </fieldset>
+        <input type="hidden" id="examIdValHidden" value="${examId }">
       </div>
 
 
@@ -185,7 +145,7 @@
       <div class="footer">
         <div class="ValError"></div>
         <div id="divSubmit" style="padding: 10px;">
-          <a id="ctlNext" href="javascript:;" class="button blue"> 提交</a>
+          <a id="ctlNext" @click="submitFunction"  class="button blue"> 提交</a>
           <div style="margin:0px 0 10px; padding-top:10px;">
             <a href="/urlreport.aspx?url=23373077"
               style="float: right;color:#aaa;font-size:13px;" class="reportto"
@@ -216,9 +176,10 @@
       type="hidden" value="2018/5/13 20:49:02" id="starttime"
       name="starttime"> <input type="hidden" value="directphone"
       id="source" name="source">
-  </form>
+  </div>
   <script type="text/javascript">
   window.getQuestionListPath = "${pageContext.request.contextPath }/getQuestionList";
+  window.submitAnswerPathss = "${pageContext.request.contextPath }/submitAnswerss";
   </script>
 <script type="text/javascript" src="js/question/answerQuestionVue.js"></script>
 </body>

@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.etimeci.ssm.entity.Answer;
 import com.etimeci.ssm.entity.Exam;
 import com.etimeci.ssm.entity.Question;
+import com.etimeci.ssm.entity.TestScore;
 import com.etimeci.ssm.entity.UserMessage;
 import com.etimeci.ssm.service.SolutionService;
 import com.etimeci.ssm.util.DataToXml;
@@ -129,6 +131,7 @@ public class SolutionController {
         }
 
         ModelAndView mv = new ModelAndView();
+        mv.addObject("examId", examId);
         mv.setViewName("/solution/answerQuestion");
         redisCacheManager.set(ip, examId);
         return mv;
@@ -225,5 +228,70 @@ public class SolutionController {
         mv.setViewName("/solution/userSeeQuestionList");
         redisCacheManager.set(ip, examId);
         return mv;
+    }
+
+    //问卷答案
+    @RequestMapping("/submitAnswerss")
+    @ResponseBody
+    public Map<String, String> submitAnswerss(@RequestBody List<Answer> answerList, HttpSession session) {
+        int testId = (int)redisCacheManager.get("testId") + 1;
+        int usefulId = 0;
+        int examId = Integer.parseInt(answerList.get(0).getExamId());
+        for (int i = 0; i < 1000; i++) {
+            if (solutionService.selectTestId(testId).size() > 0) {
+                testId++;
+            } else {
+                usefulId = testId;
+                redisCacheManager.set("testId", usefulId);
+                break;
+            }
+        }
+
+        Map<String, String> map = new HashMap<String, String>();
+
+        List<Question> list = solutionService.selectQuestionList(Integer.parseInt(answerList.get(0).getExamId()), 0, 4);
+        int sumScore = 0;
+        for(int i = 0; i < answerList.size(); i++) {
+            answerList.get(i).setTestId(usefulId);
+            //int questionNum = 0;
+            if (answerList.get(i).getType().equals("radio")) {
+                int value = Integer.parseInt(answerList.get(i).getValue());
+                //questionNum = Integer.parseInt(answerList.get(i).getQuestionNum());
+                int getScore = Integer.parseInt(list.get(i).getOption().get(value - 1).get("score"));
+                sumScore = sumScore + getScore;
+            } else if (answerList.get(i).getType().equals("checkbox")) {
+                String[] arr = answerList.get(i).getValue().split("\\|");
+                int value[] = new int[arr.length];
+                int ckeckboxScore = 0;
+                for ( int j = 0; j < arr.length; j++) {
+                    value[j] = Integer.parseInt(arr[j]);
+                    int getScore = Integer.parseInt(list.get(i).getOption().get(value[j] - 1).get("score"));
+                    if (getScore == 0) {
+                        ckeckboxScore = 0;
+                        break;
+                    }
+                    ckeckboxScore = ckeckboxScore + getScore;
+                }
+                sumScore = sumScore + ckeckboxScore;
+
+            } else if (answerList.get(i).getType().equals("textarea")) {
+            }
+        }
+        System.out.println(sumScore);
+        TestScore testScore = new TestScore();
+        testScore.setTestId(usefulId);
+        testScore.setExamId(examId);
+        testScore.setTestScore((float)sumScore);
+        if (session.getAttribute("userId") != null) {
+            testScore.setUserId((int)session.getAttribute("userId"));
+        }
+
+        if (solutionService.insertTestMessage(testScore) && solutionService.insertAnswerMessage(answerList)) {
+            map.put("status", "1");
+        } else {
+            map.put("status", "0");
+        }
+
+        return map;
     }
 }

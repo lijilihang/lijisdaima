@@ -35,6 +35,7 @@ $.each($div,function(index,value){
 })*/
 
   $('#submitQ').click(function() {
+	  
 	  questionList = [];
 	  var ids = 1;
     $('.movie_box').each(function(index) {

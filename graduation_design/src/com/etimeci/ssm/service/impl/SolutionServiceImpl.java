@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.etimeci.ssm.dao.SolutionDao;
+import com.etimeci.ssm.entity.Answer;
 import com.etimeci.ssm.entity.Exam;
 import com.etimeci.ssm.entity.Question;
+import com.etimeci.ssm.entity.TestScore;
 import com.etimeci.ssm.entity.UserMessage;
 import com.etimeci.ssm.service.SolutionService;
 import com.etimeci.ssm.util.DataToXml;
@@ -52,5 +54,20 @@ public class SolutionServiceImpl implements SolutionService {
     @Override
     public Boolean updteExamById(String examId) {
         return solutionDao.updteExamById(examId);
+    }
+
+    @Override
+    public List<TestScore> selectTestId(Integer testId) {
+        return solutionDao.selectTestId(testId);
+    }
+
+    @Override
+    public Boolean insertAnswerMessage(List<Answer> list) {
+        return solutionDao.insertAnswerMessage(list);
+    }
+
+    @Override
+    public Boolean insertTestMessage(TestScore testScore) {
+        return solutionDao.insertTestMessage(testScore);
     }
 }
