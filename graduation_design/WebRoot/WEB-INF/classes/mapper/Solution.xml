@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.etimeci.ssm.dao.SolutionDao">
+    <resultMap type="com.etimeci.ssm.entity.Exam" id="map">
+        <id column="exam_id" property="examId"/>
+        <result column="exam_title" property="examTitle"/>
+        <result column="exam_create_time" property="examCreateTime"/>
+        <result column="exam_begin_time" property="examBeginTime"/>
+        <result column="exam_end_time" property="examEndTime"/>
+    </resultMap>
+    
+    <resultMap type="com.etimeci.ssm.entity.Question" id="questionMap">
+        <id column="question_id" property="qiestionId"/>
+        <result column="question_title" property="title"/>
+        <result column="question_type" property="type"/>
+        <result column="question_option" property="optionString"/>
+        <result column="question_index" property="index"/>
+        <result column="exam_id" property="examId"/>
+        <result column="exam.exam_title" property="examTitle"/>
+    </resultMap>
+    
+    <resultMap type="com.etimeci.ssm.entity.TestScore" id="testScoreMap">
+        <id column="test_id" property="testId"/>
+        <result column="test_score" property="testScore"/>
+        <result column="test_date" property="testDate"/>
+        <result column="exam_id" property="examId"/>
+        <result column="user_id" property="userId"/>
+    </resultMap>
+    
+    
+    <insert id="insertExamMessage" parameterType="com.etimeci.ssm.entity.Exam" useGeneratedKeys="true" keyProperty="examId">
+        insert into exam
+        (
+            exam_score,
+            exam_description,
+            exam_begin_time,
+            exam_end_time,
+            founder_id,
+            exam_title
+        )
+        values
+        (
+            #{examScore},
+            #{examDescription},
+            #{examBeginTime},
+            #{examEndTime},
+            #{founderId},
+            #{examTitle}
+        )
+    </insert>
+    
+    <select id="selectExamList" resultMap="map" >
+        select 
+            exam_id,
+            exam_title,
+            exam_create_time,
+            exam_begin_time,
+            exam_end_time
+        from exam
+        where founder_id = #{founderId} and is_deleted=0 order by exam_create_time DESC
+    </select>
+    <insert id="insertQuestionList" parameterType="java.util.List">
+        insert into question (question_title, question_type, question_index, exam_id, question_content, question_option)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.title,jdbcType=VARCHAR}, #{item.type,jdbcType=VARCHAR}, #{item.index,jdbcType=INTEGER}, #{item.examId,jdbcType=INTEGER},#{item.content,jdbcType=VARCHAR},#{item.optionString,jdbcType=VARCHAR})
+        </foreach>
+    </insert>
+    
+    <select id="selectQuestionList" resultMap="questionMap" >
+        SELECT 
+            question.question_id,
+            question.question_title,
+            question.question_type,
+            question.question_option,
+            question.question_index,
+            question.exam_id,
+            exam.exam_title
+        FROM question INNER JOIN exam ON exam.exam_id=question.exam_id WHERE question.exam_id=#{examId} AND question.is_deleted=0 AND exam.is_deleted=0 AND DATE_FORMAT(NOW(),'%y-%m-%d') BETWEEN exam.exam_begin_time AND exam.exam_end_time ORDER BY question.question_index ASC
+    </select>
+    
+    <update id="updteExamById">
+        UPDATE exam
+         SET 
+         is_deleted=1
+         WHERE exam_id=#{examId}
+    </update>
+    
+    <insert id="insertAnswerMessage" parameterType="com.etimeci.ssm.entity.Answer" useGeneratedKeys="true" >
+        insert into answer
+        (
+            test_id,
+            type,
+            answer_value,
+            question_num
+        )
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.testId,jdbcType=INTEGER}, #{item.type,jdbcType=VARCHAR}, #{item.value,jdbcType=VARCHAR}, #{item.questionNum,jdbcType=INTEGER})
+        </foreach>
+    </insert>
+    
+    <insert id="insertTestMessage" parameterType="com.etimeci.ssm.entity.TestScore" useGeneratedKeys="true" keyProperty="testId">
+        insert into test_score
+        (
+            test_id,
+            test_score,
+            exam_id,
+            user_id
+        )
+        values
+        (
+            #{testId},
+            #{testScore},
+            #{examId},
+            #{userId}
+        )
+    </insert>
+    
+    <select id="selectTestId" resultMap="testScoreMap" >
+        SELECT 
+            test_id
+        FROM test_score where test_id = #{testId}
+    </select>
+    
+    <select id="selectEveryOptionNum" resultType="Integer">
+        SELECT COUNT(1) AS total 
+        FROM answer INNER JOIN test_score ON answer.test_id=test_score.test_id 
+        WHERE answer.type=#{type} AND test_score.exam_id=#{examId} AND answer.answer_value=#{optionNum} AND answer.question_num=#{questionNum}
+    </select>
+    
+    <select id="selectEveryCheckboxOptionNum" resultType="Integer">
+        SELECT COUNT(1) AS total 
+        FROM answer INNER JOIN test_score ON answer.test_id=test_score.test_id 
+        WHERE answer.type=#{type} AND test_score.exam_id=#{examId} AND answer.answer_value like concat(concat('%',#{optionNum}),'%') AND answer.question_num=#{questionNum}
+    </select>
+</mapper>

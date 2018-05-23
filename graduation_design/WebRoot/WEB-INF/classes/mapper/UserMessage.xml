@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.etimeci.ssm.dao.UserMessageDao">
+    <resultMap type="com.etimeci.ssm.entity.UserMessage" id="map">
+        <id column="u_id" property="umId"/>
+        <result column="u_nickname" property="umNickName"/>
+        <result column="u_phone" property="umPhone"/>
+        <result column="u_email" property="umEmail"/>
+        <result column="u_address" property="umAddress"/>
+        <result column="u_birthday" property="umBirthday"/>
+    </resultMap>
+    
+    <resultMap type="com.etimeci.ssm.entity.UserMessage" id="realNameMap">
+        <id column="u_id" property="umId"/>
+        <result column="u_name" property="umName"/>
+        <result column="u_phone" property="umPhone"/>
+        <result column="u_identify_num" property="umIdentifyNum"/>
+        <result column="u_email" property="umEmail"/>
+    </resultMap>
+
+    <!-- 目的：为dao接口方法提供sql语句配置 -->
+    <update id="updateUserMessage" parameterType="com.etimeci.ssm.entity.UserMessage" >
+        update z_user 
+        set
+            u_nickname=#{umNickName},
+            u_phone=#{umPhone},
+            u_email=#{umEmail},
+            u_address=#{umAddress},
+            u_birthday=#{umBirthday}
+        where u_id=#{umId}
+    </update>
+    <select id="queryUserMessage" resultMap="map" >
+        select 
+            u_id,
+            u_nickname,
+            u_phone,
+            u_email,
+            u_address,
+            u_birthday
+        from z_user
+        <where>
+             u_id = #{userId}
+        </where>
+    </select>
+    
+    <select id="selectUserPasssord" resultType="string">
+        select 
+            u_password
+        from z_user
+        <where>
+             u_id = #{userId}
+        </where>
+    </select>
+    
+    <update id="updatePassword" >
+        update z_user
+        set
+            u_password=#{newPassword}
+        where u_id=#{userId}
+    </update>
+    
+    <select id="queryRealNameMessage" resultMap="realNameMap" >
+        select 
+            u_id,
+            u_name,
+            u_phone,
+            u_email,
+            u_identify_num
+        from z_user
+        <where>
+             u_id = #{userId}
+        </where>
+    </select>
+    
+    <update id="updateRealNameMessage" parameterType="com.etimeci.ssm.entity.UserMessage" >
+        update z_user 
+        set
+            u_name=#{umName},
+            u_phone=#{umPhone},
+            u_email=#{umEmail},
+            u_identify_num=#{umIdentifyNum},
+            u_email=#{umEmail}
+        where u_id=#{umId}
+    </update>
+
+</mapper>
