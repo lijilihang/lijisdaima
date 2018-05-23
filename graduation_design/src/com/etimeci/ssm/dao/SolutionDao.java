@@ -19,4 +19,7 @@ public interface SolutionDao {
     public Boolean insertAnswerMessage(List<Answer> list);
     public Boolean insertTestMessage(TestScore testScore);
     public List<TestScore> selectTestId(@Param("testId")Integer testId);
+    public int selectEveryOptionNum(@Param("type")String type, @Param("questionNum")Integer questionNum, @Param("examId")Integer examId, @Param("optionNum")Integer optionNum);
+    public int selectEveryCheckboxOptionNum(@Param("type")String type, @Param("questionNum")Integer questionNum, @Param("examId")Integer examId, @Param("optionNum")String optionNum);
+
 }

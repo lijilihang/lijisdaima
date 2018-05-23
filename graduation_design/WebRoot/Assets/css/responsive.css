@@ -114,6 +114,7 @@
 
 .nav>li:hover a {
 	color: white;
+	text-decoration: none;
 }
 
 .nav>li:hover .sub {

@@ -70,4 +70,14 @@ public class SolutionServiceImpl implements SolutionService {
     public Boolean insertTestMessage(TestScore testScore) {
         return solutionDao.insertTestMessage(testScore);
     }
+
+    @Override
+    public int selectEveryOptionNum(String type, Integer questionNum, Integer examId, Integer optionNum) {
+        return solutionDao.selectEveryOptionNum(type, questionNum, examId, optionNum);
+    }
+
+    @Override
+    public int selectEveryCheckboxOptionNum(String type, Integer questionNum, Integer examId, String optionNum) {
+        return solutionDao.selectEveryCheckboxOptionNum(type, questionNum, examId, optionNum);
+    }
 }

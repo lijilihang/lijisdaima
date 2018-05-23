@@ -80,7 +80,7 @@ new Vue({
         contentType: "application/json",
         data: JSON.stringify(subject),
         success: function(data){
-          
+        	window.location.href = goSumitSuccessPath;
         }
       });
     },

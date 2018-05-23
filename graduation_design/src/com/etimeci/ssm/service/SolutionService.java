@@ -17,4 +17,6 @@ public interface SolutionService {
     public Boolean insertAnswerMessage(List<Answer> list);
     public Boolean insertTestMessage(TestScore testScore);
     public List<TestScore> selectTestId(Integer testId);
+    public int selectEveryOptionNum(String type, Integer questionNum, Integer examId, Integer optionNum);
+    public int selectEveryCheckboxOptionNum(String type, Integer questionNum, Integer examId, String optionNum);
 }

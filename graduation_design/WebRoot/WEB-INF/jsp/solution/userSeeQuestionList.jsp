@@ -11,24 +11,24 @@
 <meta name="HandheldFriendly" content="true">
 <title>问卷服务</title>
 <link rel="stylesheet" type="text/css" href="Assets/css/reset.css" />
-<script type="text/javascript" src="Assets/js/jquery-1.8.3.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.js"></script>
 <script type="text/javascript" src="js/layer/layer.js"></script>
 <link rel="stylesheet" type="text/css" href="js/layui/css/layui.css">
 <script type="text/javascript" src="js/layui/layui.js"></script>
 <script type="text/javascript" src="Assets/js/js_z.js"></script>
+<script type="text/javascript" src="js/echarts.js"></script>
 <link rel="stylesheet" type="text/css"
   href="Assets/plugins/FlexSlider/flexslider.css">
-<script type="text/javascript"
-  src="Assets/plugins/FlexSlider/jquery.flexslider.js"></script>
+<script type="text/javascript" src="Assets/plugins/FlexSlider/jquery.flexslider.js"></script>
 <script type="text/javascript" src="Assets/js/main.js"></script>
 <script type="text/javascript" src="js/question/index.js"></script>
 <script type="text/javascript" src="js/vue/vue.js"></script>
 
 <link rel="stylesheet" type="text/css" href="Assets/css/thems.css">
 <link rel="stylesheet" type="text/css" href="Assets/css/responsive.css">
-<link rel="stylesheet" type="text/css"
-  href="css/question/answerQuestion.css">
+<link rel="stylesheet" type="text/css" href="css/question/answerQuestion.css">
 </head>
 <body>
 
@@ -73,9 +73,7 @@
       <div id="divDesc" class="formfield">
         <span class="description">
           <p></p>
-          <p>&nbsp; &nbsp; &nbsp;
-            &nbsp;您好，为了更好的了解大数据环境下公民个人信息保护的现状，更好的保护自身权利和维护他人的利益，特此设计了问卷，对于您的问卷，我会依据国家相关法律法规，做好保密工作，也希望您能够配合和参与，非常感谢。</p>
-          <p>&nbsp; &nbsp; &nbsp; 填写说明：请您将符合您本人情况和意见的答案填写在括号中。</p>
+        
           <p></p>
           <p></p>
         </span>
@@ -84,20 +82,10 @@
       <div id="divQuestion">
         <fieldset class="fieldset" style="" id="fieldset1">
           <div id="divPage1" style="margin:7px 12px;">
-            <b><b>第一部分（单选和多选）</b><br> </b>
+            <b>本次问卷题目</b>
+            <img alt="" title="分数统计图" class="barPictrue" src="css/question/images/bar.png">
           </div>
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
+ 
           
           <div class="field ui-field-contain" id="div1" v-for="item in items">
             <div class="field-label" >
@@ -105,6 +93,7 @@
               <span class="req">*</span>
               <span class="qtypetip" v-if="item.type == 'checkbox'">&nbsp;[多选题]</span>
               <span class="qtypetip" v-if="item.type == 'textArea'">&nbsp;[填空题]</span>
+              <img alt="" class="piePictrue" @click="optionStatisc(item.title,item.type,item.index)" src="css/question/images/pie.png" data-toggle="modal" data-target="#myModal">
             </div>
             <div class="ui-controlgroup">
 
@@ -123,62 +112,10 @@
             <div class="errorMessage"></div>
           </div>
           
-          
-          
-          
-         <!--  <div class="field ui-field-contain" id="div1">
-            <div class="field-label" >
-                                                 您的建议是什么
-              <span class="req">*</span>
-              <span class="qtypetip" >&nbsp;[填空题]</span>
-            </div>
-            <div class="ui-controlgroup">
-              <div class="ui-radio" v-for="perOption in item.option" @click="triggerRadio($event,$index)">
-                <span class="jqradiowrapper">
-                  <input :type="item.type" :value="perOption.id" :name="item.index" class="radioSize">
-                </span>
-                <div class="label" >{{perOption.value}}</div>
-              </div>
-              <textarea rows="" cols="" class="form-control inputArea"></textarea>
-            </div>
-            <div class="errorMessage"></div>
-          </div> -->
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
+  
           
         </fieldset>
       </div>
-
-
-
-
-
-
-
-
-
-
-
 
 
      
@@ -208,18 +145,49 @@
           title=" _不止问卷调查/在线考试"> </a>调查问卷系统</span>
       </div>
     </div>
-
-
- 
-
     <input type="hidden" value="1" id="action" name="action"> <input
       type="hidden" value="2018/5/13 20:49:02" id="starttime"
       name="starttime"> <input type="hidden" value="directphone"
       id="source" name="source">
+      
+      
+      
+      <!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" 
+                        aria-hidden="true">×
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                   {{modelTitle}}
+                </h4>
+            </div>
+            <div class="modal-body">
+              <div id="optionPieChar" class="optionPieChar"></div>
+            </div>
+            <div class="modal-footer">
+                
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
   </form>
-  <script type="text/javascript">
+  
+  
+  
+
+
+
+  
+  
+  
+  
+<script type="text/javascript">
   window.getQuestionListPath = "${pageContext.request.contextPath }/getQuestionList";
   window.goShowLinkPath = "${pageContext.request.contextPath }/goShowLink";
+  window.getOptionNumPath = "${pageContext.request.contextPath }/getOptionNum";
   </script>
 <script type="text/javascript" src="js/question/userSeeQuestionList.js"></script>
 </body>

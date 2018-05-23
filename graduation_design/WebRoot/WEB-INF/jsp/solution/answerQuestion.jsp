@@ -180,6 +180,7 @@
   <script type="text/javascript">
   window.getQuestionListPath = "${pageContext.request.contextPath }/getQuestionList";
   window.submitAnswerPathss = "${pageContext.request.contextPath }/submitAnswerss";
+  window.goSumitSuccessPath = "${pageContext.request.contextPath }/goSumitSuccess";
   </script>
 <script type="text/javascript" src="js/question/answerQuestionVue.js"></script>
 </body>

@@ -253,10 +253,8 @@ public class SolutionController {
         int sumScore = 0;
         for(int i = 0; i < answerList.size(); i++) {
             answerList.get(i).setTestId(usefulId);
-            //int questionNum = 0;
             if (answerList.get(i).getType().equals("radio")) {
                 int value = Integer.parseInt(answerList.get(i).getValue());
-                //questionNum = Integer.parseInt(answerList.get(i).getQuestionNum());
                 int getScore = Integer.parseInt(list.get(i).getOption().get(value - 1).get("score"));
                 sumScore = sumScore + getScore;
             } else if (answerList.get(i).getType().equals("checkbox")) {
@@ -277,7 +275,6 @@ public class SolutionController {
             } else if (answerList.get(i).getType().equals("textarea")) {
             }
         }
-        System.out.println(sumScore);
         TestScore testScore = new TestScore();
         testScore.setTestId(usefulId);
         testScore.setExamId(examId);
@@ -292,6 +289,43 @@ public class SolutionController {
             map.put("status", "0");
         }
 
+        return map;
+    }
+
+    //提交问题成功页面
+    @RequestMapping("/goSumitSuccess")
+    public ModelAndView goSumitSuccess() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/solution/submitSuccess");
+        return mv;
+    }
+
+    //得到问题选项的数量
+    @RequestMapping("/getOptionNum")
+    @ResponseBody
+    public Map<String, String> getOptionNum(
+            @RequestParam(value="type",required=true) String type,
+            @RequestParam(value="questionNum",required=true) Integer questionNum,
+            @RequestParam(value="examId",required=true) Integer examId,
+            @RequestParam(value="optionNum",required=true) Integer optionNum
+        ) {
+        Map<String, String> map = new HashMap<String, String>();
+        String numberString = "";
+        if (type.equals("radio")) {
+            for (int i = 0; i < optionNum; i++) {
+                int number = solutionService.selectEveryOptionNum(type, questionNum, examId, i+1);
+                numberString = numberString + String.valueOf(number) + ",";
+            }
+            map.put("value", numberString);
+        } else if (type.equals("checkbox")) {
+            for (int i = 0; i < optionNum; i++) {
+                String optionNumString = "";
+                optionNumString = String.valueOf(i + 1) + "|";
+                int number = solutionService.selectEveryCheckboxOptionNum(type, questionNum, examId, optionNumString);
+                numberString = numberString + String.valueOf(number) + ",";
+            }
+            map.put("value", numberString);
+        }
         return map;
     }
 }

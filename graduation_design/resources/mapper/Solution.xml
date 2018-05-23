@@ -124,4 +124,16 @@
             test_id
         FROM test_score where test_id = #{testId}
     </select>
+    
+    <select id="selectEveryOptionNum" resultType="Integer">
+        SELECT COUNT(1) AS total 
+        FROM answer INNER JOIN test_score ON answer.test_id=test_score.test_id 
+        WHERE answer.type=#{type} AND test_score.exam_id=#{examId} AND answer.answer_value=#{optionNum} AND answer.question_num=#{questionNum}
+    </select>
+    
+    <select id="selectEveryCheckboxOptionNum" resultType="Integer">
+        SELECT COUNT(1) AS total 
+        FROM answer INNER JOIN test_score ON answer.test_id=test_score.test_id 
+        WHERE answer.type=#{type} AND test_score.exam_id=#{examId} AND answer.answer_value like concat(concat('%',#{optionNum}),'%') AND answer.question_num=#{questionNum}
+    </select>
 </mapper>

@@ -58,7 +58,7 @@
     <filter-class>com.etimeci.ssm.filter.SessionFilter</filter-class>
     <init-param>
       <param-name>notNeedLoginPages</param-name>
-      <param-value>,goLogin,goRegister,vcode,goIndexRegister1,loginValidate,register,goResuccess,goSolutionRegister,goAnswerQuestion,getQuestionList,submitAnswerss</param-value>
+      <param-value>,goLogin,goRegister,vcode,goIndexRegister1,loginValidate,register,goResuccess,goSolutionRegister,goAnswerQuestion,getQuestionList,submitAnswerss,goSumitSuccess</param-value>
     </init-param>
   </filter>
   <filter-mapping>

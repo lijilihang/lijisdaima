@@ -1024,3 +1024,29 @@ input[type=checkbox], input[type=radio] {
   width: 100%;
   border: 0px;
 }
+
+.piePictrue {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.barPictrue {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  margin-left: 20px;
+}
+
+.optionPieChar {
+  position: relative;
+  width: 550px;
+  height: 380px;
+  margin-left: 0px;
+}
+
+a {
+  text-decoration : none;
+}
