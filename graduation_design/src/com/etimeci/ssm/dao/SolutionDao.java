@@ -21,5 +21,8 @@ public interface SolutionDao {
     public List<TestScore> selectTestId(@Param("testId")Integer testId);
     public int selectEveryOptionNum(@Param("type")String type, @Param("questionNum")Integer questionNum, @Param("examId")Integer examId, @Param("optionNum")Integer optionNum);
     public int selectEveryCheckboxOptionNum(@Param("type")String type, @Param("questionNum")Integer questionNum, @Param("examId")Integer examId, @Param("optionNum")String optionNum);
+    public List<TestScore> selectTestScoreTotal(@Param("examId")Integer examId);
+    public int selectMaxScore(@Param("examId")Integer examId);
+    public int selectScoreCount(@Param("examId") Integer examId, @Param("stratScore") Float stratScore, @Param("endScore") Float endScore);
 
 }

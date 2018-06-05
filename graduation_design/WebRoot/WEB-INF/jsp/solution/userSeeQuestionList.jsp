@@ -83,7 +83,8 @@
         <fieldset class="fieldset" style="" id="fieldset1">
           <div id="divPage1" style="margin:7px 12px;">
             <b>本次问卷题目</b>
-            <img alt="" title="分数统计图" class="barPictrue" src="css/question/images/bar.png">
+            <img alt="" title="问卷统计图" @click="questionStatisc" class="barPictrue" src="css/question/images/line.png" data-toggle="modal" data-target="#myModal">
+            <img alt="" title="分数统计图" @click="scoreOptimistic" class="barPictrue" src="css/question/images/bar.png" data-toggle="modal" data-target="#myModal">
           </div>
  
           
@@ -93,7 +94,7 @@
               <span class="req">*</span>
               <span class="qtypetip" v-if="item.type == 'checkbox'">&nbsp;[多选题]</span>
               <span class="qtypetip" v-if="item.type == 'textArea'">&nbsp;[填空题]</span>
-              <img alt="" class="piePictrue" @click="optionStatisc(item.title,item.type,item.index)" src="css/question/images/pie.png" data-toggle="modal" data-target="#myModal">
+              <img alt="" title="问题统计 " class="piePictrue" @click="optionStatisc(item.title,item.type,item.index)" src="css/question/images/pie.png" data-toggle="modal" data-target="#myModal">
             </div>
             <div class="ui-controlgroup">
 
@@ -185,9 +186,11 @@
   
   
 <script type="text/javascript">
-  window.getQuestionListPath = "${pageContext.request.contextPath }/getQuestionList";
+  window.getQuestionListPath = "${pageContext.request.contextPath }/getUserSeeQuestionList";
   window.goShowLinkPath = "${pageContext.request.contextPath }/goShowLink";
   window.getOptionNumPath = "${pageContext.request.contextPath }/getOptionNum";
+  window.getTestScoreTotalPath = "${pageContext.request.contextPath }/getTestScoreTotal";
+  window.getLineChartMessagePath = "${pageContext.request.contextPath }/getLineChartMessage";
   </script>
 <script type="text/javascript" src="js/question/userSeeQuestionList.js"></script>
 </body>

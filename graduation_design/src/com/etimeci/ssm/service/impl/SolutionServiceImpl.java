@@ -80,4 +80,19 @@ public class SolutionServiceImpl implements SolutionService {
     public int selectEveryCheckboxOptionNum(String type, Integer questionNum, Integer examId, String optionNum) {
         return solutionDao.selectEveryCheckboxOptionNum(type, questionNum, examId, optionNum);
     }
+
+    @Override
+    public List<TestScore> selectTestScoreTotal(Integer examId) {
+        return solutionDao.selectTestScoreTotal(examId);
+    }
+
+    @Override
+    public int selectMaxScore(Integer examId) {
+        return solutionDao.selectMaxScore(examId);
+    }
+
+    @Override
+    public int selectScoreCount(Integer examId, Float stratScore, Float endScore) {
+        return solutionDao.selectScoreCount(examId, stratScore, endScore);
+    }
 }

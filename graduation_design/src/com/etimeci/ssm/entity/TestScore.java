@@ -6,9 +6,16 @@ public class TestScore {
     private String testDate;
     private Integer examId;
     private Integer userId;
+    private Integer total;
 
 
 
+    public Integer getTotal() {
+        return total;
+    }
+    public void setTotal(Integer total) {
+        this.total = total;
+    }
     public String getTestDate() {
         return testDate;
     }

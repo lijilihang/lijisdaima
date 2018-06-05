@@ -162,6 +162,7 @@ $(window).load(function() {
 </div>
 <script type="text/javascript">
   window.goExamListPath = "${pageContext.request.contextPath }/goExamList";
+  window.goUserSeeListPath = "${pageContext.request.contextPath }/goUserSeeQuestionList";
 </script>
 <script type="text/javascript" src="js/question/linkVue.js"></script>
 </body>

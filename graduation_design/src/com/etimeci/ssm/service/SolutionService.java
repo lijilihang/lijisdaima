@@ -19,4 +19,7 @@ public interface SolutionService {
     public List<TestScore> selectTestId(Integer testId);
     public int selectEveryOptionNum(String type, Integer questionNum, Integer examId, Integer optionNum);
     public int selectEveryCheckboxOptionNum(String type, Integer questionNum, Integer examId, String optionNum);
+    public List<TestScore> selectTestScoreTotal(Integer examId);
+    public int selectMaxScore(Integer examId);
+    public int selectScoreCount(Integer examId, Float stratScore, Float endScore);
 }

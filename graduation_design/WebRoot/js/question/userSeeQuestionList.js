@@ -19,12 +19,12 @@ new Vue({
       this.offset = this.offset + 1
       var offsets = this.offset * 10;
       var pages = {
-        offset: offsets,
+        examId: localStorage.getItem("examId")
       }
       var vueBody = this;
       $.ajax({
         url: getQuestionListPath,
-        type: 'get',
+        type: 'POST',
         dataType: 'JSON',
         data: pages,
         success: function(data) {
@@ -59,6 +59,11 @@ new Vue({
               trigger: 'item',
               formatter: "{a} <br/>{b} : {c} ({d}%)"
           },
+          toolbox: {
+            feature: {
+              saveAsImage: {}
+            }
+          },
           legend: {
               orient: 'vertical',
               // top: 'middle',
@@ -69,7 +74,7 @@ new Vue({
               data: []
           },
           series : [
-              
+
               {
                   type: 'pie',
                   radius : '65%',
@@ -87,11 +92,6 @@ new Vue({
              }
           ]
       };
-     /* {value:1548,name: '幽州'},
-      {value:535, name: '荆州'},
-      {value:510, name: '兖州'},
-      {value:634, name: '益州'},
-      {value:735, name: '西凉'}*/
       var vueBody = this;
       $.ajax({
           url: getOptionNumPath,
@@ -110,6 +110,124 @@ new Vue({
             }
             myPieChart.setOption(optionPie);
           },
+      })
+    },
+    questionStatisc: function() {
+      this.modelTitle = this.items[0].examTitle;
+      var myLineChart = echarts.init(document.getElementById('optionPieChar'));
+      optionLine = {
+        title: {
+          text: '本问卷信息统计',
+          left: 'center'
+        },
+        tooltip: {
+          trigger: 'axis'
+        },
+        legend: {
+          data:['答卷数量'],
+          //x: 'right',
+          y: 'bottom',
+        },
+        grid: {
+          left: '6%',
+          right: '10%',
+          bottom: '10%',
+          containLabel: true
+        },
+        toolbox: {
+          feature: {
+            saveAsImage: {}
+          }
+        },
+        xAxis: {
+          type: 'category',
+          boundaryGap: false,
+          data: []
+        },
+        yAxis: {
+          type: 'value'
+        },
+        series: [
+          {
+            name:'答卷数量',
+            type:'line',
+            stack: '总量',
+            data:[]
+          },
+        ]
+      };
+      $.ajax({
+        url: getTestScoreTotalPath,
+        type: 'POST',
+        dataType: 'JSON',
+        data: {examId: localStorage.getItem("examId")},
+        success: function(result) {
+          for (var i = 0; i<result.length; i++) {
+            optionLine.xAxis.data.push(result[i].testDate);
+            optionLine.series[0].data.push(result[i].total);
+          }
+          myLineChart.setOption(optionLine);
+        },
+      })
+    },
+    scoreOptimistic:function() {
+      var myBarChart = echarts.init(document.getElementById('optionPieChar'));
+      optionBar = {
+        title: {
+          text: '本问卷分数统计',
+          left: 'center'
+        },
+        tooltip: {
+          trigger: 'axis'
+        },
+        legend: {
+          data:['答卷分数数量'],
+          //x: 'right',
+          y: 'bottom',
+        },
+        grid: {
+          left: '6%',
+          right: '10%',
+          bottom: '10%',
+          containLabel: true
+        },
+        toolbox: {
+          feature: {
+            saveAsImage: {}
+          }
+        },
+        xAxis: {
+          type: 'category',
+          //boundaryGap: false,
+          data: []
+        },
+        yAxis: {
+          type: 'value'
+        },
+        series: [
+          {
+            name:'答卷分数数量',
+            type:'bar',
+            stack: '总量',
+            data:[]
+          },
+        ]
+      };
+      $.ajax({
+        url: getLineChartMessagePath,
+        type: 'POST',
+        dataType: 'JSON',
+        data: {examId: localStorage.getItem("examId")},
+        success: function(result) {
+          console.log(result)
+          for (var i = 0; i<result.length; i++) {
+            optionBar.xAxis.data.push(result[i].scoreArea);
+            optionBar.series[0].data.push(result[i].counts);
+          }
+          console.log(optionBar.xAxis.data)
+          console.log(optionBar.series[0].data)
+          myBarChart.setOption(optionBar);
+        },
       })
     }
   }

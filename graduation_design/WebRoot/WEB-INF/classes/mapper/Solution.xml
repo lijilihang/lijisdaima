@@ -27,6 +27,7 @@
         <result column="test_date" property="testDate"/>
         <result column="exam_id" property="examId"/>
         <result column="user_id" property="userId"/>
+        <result column="total" property="total"/>
     </resultMap>
     
     
@@ -135,5 +136,20 @@
         SELECT COUNT(1) AS total 
         FROM answer INNER JOIN test_score ON answer.test_id=test_score.test_id 
         WHERE answer.type=#{type} AND test_score.exam_id=#{examId} AND answer.answer_value like concat(concat('%',#{optionNum}),'%') AND answer.question_num=#{questionNum}
+    </select>
+    
+    <select id="selectTestScoreTotal" resultMap="testScoreMap" >
+        SELECT 
+        COUNT(*) AS total,
+        DATE_FORMAT(test_date,'%Y/%m/%d') AS test_date
+        FROM test_score WHERE exam_id=#{examId}
+        GROUP BY DATE_FORMAT(test_date,'%Y-%m-%d') ORDER BY test_date ASC LIMIT 0,7
+    </select>
+    <select id="selectMaxScore" resultType="Integer">
+      SELECT exam_score FROM exam WHERE exam_id=#{examId}
+    </select>
+    
+    <select id="selectScoreCount" resultType="Integer">
+      SELECT COUNT(*) AS counts FROM test_score WHERE test_score BETWEEN #{stratScore} AND #{endScore} AND exam_id =#{examId}
     </select>
 </mapper>

@@ -205,28 +205,9 @@ public class SolutionController {
 
     //用户查看创建的问卷（预览）
     @RequestMapping("/goUserSeeQuestionList")
-    public ModelAndView goUserSeeQuestionList(HttpServletRequest request, @RequestParam(value="examId",required=true) int examId) {
-
-        String ip = request.getHeader("x-forwarded-for");
-        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-          ip = request.getHeader("Proxy-Client-IP");
-        }
-        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-          ip = request.getHeader("WL-Proxy-Client-IP");
-        }
-        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-          ip = request.getHeader("HTTP_CLIENT_IP");
-        }
-        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-          ip = request.getHeader("HTTP_X_FORWARDED_FOR");
-        }
-        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-          ip = request.getRemoteAddr();
-        }
-
+    public ModelAndView goUserSeeQuestionList() {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/solution/userSeeQuestionList");
-        redisCacheManager.set(ip, examId);
         return mv;
     }
 
@@ -327,5 +308,57 @@ public class SolutionController {
             map.put("value", numberString);
         }
         return map;
+    }
+
+    //获取填写问卷的数量和时间的数据
+    @RequestMapping("/getTestScoreTotal")
+    @ResponseBody
+    public List<TestScore> getTestScoreTotal(@RequestParam(value="examId",required=true) Integer examId) {
+        List<TestScore> data = solutionService.selectTestScoreTotal(examId);
+        return data;
+    }
+
+    //用户看到的页面异步加载问题的信息，获取问题的题目选项信息
+    @RequestMapping("/getUserSeeQuestionList")
+    @ResponseBody
+    public List<Question> getUserSeeQuestionList(@RequestParam(value="examId",required=true) Integer examId) {
+        List<Question> list = new ArrayList<Question>();
+        list = solutionService.selectQuestionList(examId, 0, 4);
+        return list;
+    }
+
+    @RequestMapping("/getLineChartMessage")
+    @ResponseBody
+    public List<Map<String, String>> getLineChartMessage(@RequestParam( value = "examId", required = false) Integer examId) {
+        float maxScore = solutionService.selectMaxScore(examId);
+        float score = maxScore/(float)5.0;
+        String everScoreString = String.format("%.1f", score);
+        float everScore = Float.parseFloat(everScoreString);
+        String[] stringScore = new String[7];
+        List<Map<String, String>> list = new ArrayList<Map<String,String>>();
+
+        for(int i = 0; i < 5; i++) {
+            Map<String, String> map = new HashMap<String, String>();
+            if (i == 4) {
+                String towScoreString = String.format("%.1f", everScore*i);
+                stringScore[4] = towScoreString + "-" + String.valueOf(maxScore);
+                map.put("scoreArea", stringScore[4]);
+                map.put("counts", String.valueOf(solutionService.selectScoreCount(examId, everScore*4, maxScore)));
+            } else if (i == 0) {
+                stringScore[i] = String.valueOf(everScore*i) + "-" + String.valueOf(everScore*(i+1));
+                map.put("scoreArea", stringScore[i]);
+                map.put("counts", String.valueOf(solutionService.selectScoreCount(examId, everScore*i, everScore*(i+1))));
+            } else {
+                String oneScoreString = String.format("%.1f", everScore*(i+1));
+                String towScoreString = String.format("%.1f", everScore*i);
+                stringScore[i] = towScoreString + "-" + oneScoreString;
+                map.put("scoreArea", stringScore[i]);
+                map.put("counts", String.valueOf(solutionService.selectScoreCount(examId, everScore*i + 0.1f, everScore*(i+1))));
+            }
+
+            list.add(map);
+        }
+
+        return list;
     }
 }
