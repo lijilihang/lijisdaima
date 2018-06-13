@@ -8,7 +8,8 @@
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
 <title>问卷服务</title>
 <link rel="stylesheet" type="text/css" href="Assets/css/reset.css"/>
-<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="js/layer/layer.js"></script>
 <link rel="stylesheet" type="text/css" href="js/layui/css/layui.css">
 <script type="text/javascript" src="js/layui/layui.js"></script>
 <script type="text/javascript" src="js/vue/vue.js"></script>
@@ -156,14 +157,16 @@ $(window).load(function() {
       
       
   <div class="changeUserMessage" style="display: " id="userMessages">
-		  <form class="layui-form" action="">
+		  <form id="uploadPic" action="#" enctype="multipart/form-data" class="layui-form">
 		  
 		 <div class="showPicture">
 		 <div class="picture">
+ 
 		 <i class="layui-icon">
-		   <input type="file" @change="onPictureChange" id="choosePictures" class="choose"/>&#xe62f;</i>
+		   <input type="file" name="file" title="" @change="onPictureChange" id="choosePictures" class="choose"/>&#xe62f;</i>
+
 		 </div>
-		 <img v-if="imagePath != ''" v-bind:src="imagePath" class="myImage"  />
+		 <img v-if="imagePath != ''" v-bind:src="imagePath" title="修改头像" class="myImage"  />
 		 <div v-if="imagePath == ''">修改头像</div>
 		 </div>
 
@@ -282,7 +285,7 @@ $(window).load(function() {
 </div>
 <script type="text/javascript">
   window.getUserMesssagePath = "${pageContext.request.contextPath }/selectUserMessage";
-  window.changeImage = "${pageContext.request.contextPath }/changeImage";
+  window.changeImage = "${pageContext.request.contextPath }/upload";
   window.changeUserMessagePath = "${pageContext.request.contextPath }/changeUserMessage";
   layui.use('laydate', function(){
       var laydate = layui.laydate;

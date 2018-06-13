@@ -1,21 +1,28 @@
 package com.etimeci.ssm.web;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import javax.servlet.http.HttpSession;
 
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.etimeci.ssm.constant.Constants;
 import com.etimeci.ssm.entity.Answer;
 import com.etimeci.ssm.entity.Exam;
 import com.etimeci.ssm.entity.Question;
@@ -361,4 +368,79 @@ public class SolutionController {
 
         return list;
     }
+
+    /*@RequestMapping(value = "/changeImage", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, String> changeImage(MultipartFile[] mfile, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String resMsg = "";
+        try {
+            long  startTime=System.currentTimeMillis();
+            System.out.println("fileName："+file.getOriginalFilename());
+            String path="/Users/loukai/easylife/files/"+new Date().getTime()+file.getOriginalFilename();
+            System.out.println("path:" + path);
+
+            File newFile=new File(path);
+            //通过CommonsMultipartFile的方法直接写文件
+            file.transferTo(newFile);
+            long  endTime=System.currentTimeMillis();
+            System.out.println("运行时间："+String.valueOf(endTime-startTime)+"ms");
+            resMsg = "1";
+        } catch (IllegalStateException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            resMsg = "0";
+        }
+        response.getWriter().write(resMsg);
+        return null;
+    }*/
+
+    @RequestMapping(value = "/test222")
+    @ResponseBody
+    public ModelAndView test222() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/solution/test");
+        return mv;
+    }
+
+    @RequestMapping(value="/upload", method=RequestMethod.POST)
+    @ResponseBody
+    public Map<String, String> uploadFile(
+            HttpServletRequest request,
+            HttpSession session,
+            @RequestParam(value="file",required=true) MultipartFile uploadFile
+            ) {
+        String rootPath = request.getServletContext().getRealPath("/") + "uploadImg\\";
+        Random ramdom = new Random();
+        String orNames = "";
+        Map<String, String> map = new HashMap<String, String>();
+        if (uploadFile != null) {
+            String orName = uploadFile.getOriginalFilename();//获取文件的原名
+            orName = orName.substring(orName.lastIndexOf("."), orName.length());//获取文件的后缀名
+            String fileName = System.currentTimeMillis() + ramdom.nextInt(100) + "";
+            orNames = rootPath + fileName + orName;//路径加名字
+
+            try {
+                //把文件复制到uploadImg文件夹中，copy到tomcat目录下
+                FileCopyUtils.copy(uploadFile.getInputStream(), new FileOutputStream(orNames));
+                //copy到myeclipse工作空间下，仅仅为了方便在myeclipse中显示
+                FileCopyUtils.copy(uploadFile.getInputStream(), new FileOutputStream(Constants.WORK_SPACE_UPLOADIMG + fileName + orName));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            String imageDatabasePath = Constants.HTTP_TOMCAT_UPLOADIMG + fileName + orName;
+            UserMessage userMessage = (UserMessage)session.getAttribute("user");
+            int userId = userMessage.getUmId();
+
+            if (solutionService.updateImage(userId, imageDatabasePath)) {
+                map.put("status", "1");
+            } else {
+                map.put("status", "2");
+            }
+        } else {
+            map.put("status", "0");
+        }
+
+        return map;
+    }
 }
+

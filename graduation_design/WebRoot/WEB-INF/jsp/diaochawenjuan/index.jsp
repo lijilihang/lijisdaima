@@ -128,7 +128,7 @@ $(window).load(function() {
 <div class="i_box slt">
 	<div class="box_h">
 		
-        <div class="title"><a href="solution.html">
+        <div class="title"><a href="${pageContext.request.contextPath}/goSolutionRegister">
         	免费使用
             <div class="line line_l">&nbsp;</div>
             
@@ -136,7 +136,7 @@ $(window).load(function() {
         </div>
         
         <p>FREE</p>
-        <div class="animal"><a href="#">免费使用</a></div>
+        <div class="animal"><a href="${pageContext.request.contextPath}/goSolutionRegister">免费使用</a></div>
     </div>
     
     

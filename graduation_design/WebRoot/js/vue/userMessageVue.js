@@ -26,6 +26,7 @@ new Vue({
           vueBody.userEmail = data[0].umEmail;
           vueBody.userAddress = data[0].umAddress;
           vueBody.userBirthday = data[0].umBirthday;
+          vueBody.imagePath = data[0].umPhotoPath;
         },
       })
     },
@@ -73,19 +74,24 @@ new Vue({
         that.imagePath = e.target.result;
       };
       reader.readAsDataURL(file);
-      
+
       var data = this.formData;
-      var ss= data.get("file");
       var vueBody = this;
+      //第二种方式获取formata,但没有用到
+      var formDatas = new FormData($("#uploadPic")[0]);
       $.ajax({
         url: changeImage,
         type: 'POST',
         data: data,
-        contentType: false,//没有设置任何内容类型头信息
+        async: false,
+        cache: false,
+        contentType: false,
         processData: false,
-        dataType:"JSON",
+        //dataType:"JSON",
         success: function(result) {
-          
+          if (result.status == "1") {
+            layer.msg('修改头像成功', {icon: 0, time: 1600});
+          }
         },
       })
     },

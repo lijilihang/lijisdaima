@@ -22,4 +22,5 @@ public interface SolutionService {
     public List<TestScore> selectTestScoreTotal(Integer examId);
     public int selectMaxScore(Integer examId);
     public int selectScoreCount(Integer examId, Float stratScore, Float endScore);
+    public Boolean updateImage(Integer userId, String imagePath);
 }

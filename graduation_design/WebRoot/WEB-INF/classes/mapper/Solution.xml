@@ -143,7 +143,7 @@
         COUNT(*) AS total,
         DATE_FORMAT(test_date,'%Y/%m/%d') AS test_date
         FROM test_score WHERE exam_id=#{examId}
-        GROUP BY DATE_FORMAT(test_date,'%Y-%m-%d') ORDER BY test_date ASC LIMIT 0,7
+        GROUP BY DATE_FORMAT(test_date,'%Y-%m-%d') ORDER BY test_date DESC LIMIT 0,7
     </select>
     <select id="selectMaxScore" resultType="Integer">
       SELECT exam_score FROM exam WHERE exam_id=#{examId}
@@ -152,4 +152,7 @@
     <select id="selectScoreCount" resultType="Integer">
       SELECT COUNT(*) AS counts FROM test_score WHERE test_score BETWEEN #{stratScore} AND #{endScore} AND exam_id =#{examId}
     </select>
+    <update id="updateImage">
+      UPDATE z_user SET u_photo_path=#{imagePath} WHERE u_id=#{userId}
+    </update>
 </mapper>

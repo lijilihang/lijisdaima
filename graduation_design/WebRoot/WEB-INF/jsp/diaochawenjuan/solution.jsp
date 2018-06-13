@@ -136,24 +136,24 @@ $(window).load(function() {
             <li>
                 <div class="l_up">
                     <div class="tu"><img src="Assets/images/icon4.png" alt=""/></div>
-                    <div class="title">广告业务管理系统</div>
+                    <div class="title">我要答卷</div>
                     <div class="more"><a href=""><img src="Assets/images/icon1.png" alt=""/></a></div>
                 </div>
                 <div class="l_dn">
                     <div class="l_line"><span>&nbsp;</span></div>
-                    <p>提供了一个开放的应用上传，发布，交流，分享的网络平台，打造更加便利的电视应用生态圈。</p>
+                    <p>在这里您可以看到别人推荐给您的问卷哦</p>
                     <a href="">MORE</a>
                 </div>
             </li>
             <li>
                 <div class="l_up">
                     <div class="tu"><img src="Assets/images/icon5.png" alt=""/></div>
-                    <div class="title">视频编码系统</div>
+                    <div class="title">问卷期限</div>
                     <div class="more"><a href=""><img src="Assets/images/icon1.png" alt=""/></a></div>
                 </div>
                 <div class="l_dn">
                     <div class="l_line"><span>&nbsp;</span></div>
-                    <p>提供了一个开放的应用上传，发布，交流，分享的网络平台，打造更加便利的电视应用生态圈。</p>
+                    <p>在这里可以看到您创建的问卷时间信息</p>
                     <a href="">MORE</a>
                 </div>
             </li>

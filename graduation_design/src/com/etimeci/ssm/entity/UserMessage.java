@@ -36,6 +36,7 @@ public class UserMessage {
     private String umEmail;//用户邮箱
     private String umAddress;//所在城市
     private Integer umLoginName;//用户名
+    private String umPhotoPath;
     private String[] umRole;//角色
     private String[] umPermission;//权限s
     private String[] umRoles;//角色
@@ -44,6 +45,23 @@ public class UserMessage {
     public UserMessage() {
         super();
     }
+
+
+
+
+    public String getUmPhotoPath() {
+        return umPhotoPath;
+    }
+
+
+
+
+    public void setUmPhotoPath(String umPhotoPath) {
+        this.umPhotoPath = umPhotoPath;
+    }
+
+
+
 
     public UserMessage(String umRole, String umPermission) {
             umRoles = umRole.split(",");

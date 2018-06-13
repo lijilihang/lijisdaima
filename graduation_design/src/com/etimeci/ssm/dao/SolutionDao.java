@@ -24,5 +24,6 @@ public interface SolutionDao {
     public List<TestScore> selectTestScoreTotal(@Param("examId")Integer examId);
     public int selectMaxScore(@Param("examId")Integer examId);
     public int selectScoreCount(@Param("examId") Integer examId, @Param("stratScore") Float stratScore, @Param("endScore") Float endScore);
+    public Boolean updateImage(@Param("userId") Integer userId, @Param("imagePath") String imagePath);
 
 }

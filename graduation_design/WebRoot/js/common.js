@@ -46,7 +46,7 @@ $(document).ready(function() {
         //var j=JSON.stringify(data);
         //var j = JSON.parse(data);
         if(data[0].response==false){
-          
+
         }else{
         if(data[0].umPhone==false){
           alert("用户名不存在！");
@@ -65,13 +65,13 @@ $(document).ready(function() {
           }
         }
       }
-        
+
       }
     });
   });
-  
-  
-  
+
+
+
   //异步验证注册信息
     /*$("#submit2").click(function() {
       $.ajax({
@@ -85,20 +85,20 @@ $(document).ready(function() {
           "umIdentifyNum" : $("#umIdentifyNum2").val(),
           "umEmail" : $("#umEmail2").val(),
           "umCity" : $("#umCity2").val()
-          
+
         },
          dataType: "json",//服务器返回的数据类
         success : function(data) {
           var j=JSON.stringify(data);
           alert(j.toString());
-          
-          
+
+
         }
       });
     });*/
-    
-  
-  
+
+
+
   $("#umPhone2").blur(function() {
     $.ajax({
       contentType: "application/json;charset=utf-8",//发送数据时的格式
@@ -111,7 +111,7 @@ $(document).ready(function() {
         if(data.umPhone==2){
           alert("用户名已存在！");
           $("#registerForm").attr("onsubmit", "return false");
-          
+
         }else if(data.umPhone==1){
           $("#registerForm").attr("onsubmit", "return true");
         }else{
@@ -120,8 +120,8 @@ $(document).ready(function() {
       }
     });
   });
-  
-  
+
+
   $("#loginForm").validate({
     rules : {
       umPhone : {
@@ -165,8 +165,8 @@ $(document).ready(function() {
         required : true, //必填
         minlength : 2, //最少6个字符
         maxlength : 32, //最多20个字符
-        
-        
+
+
       /*remote:{
         url:"http://kouss.com/demo/Sharelink/remote.json",//用户名重复检查，别跨域调用
         type:"post",
@@ -180,7 +180,7 @@ $(document).ready(function() {
       umEmail : {
         required : true,
         umEmail : true,
-        
+
       },
       umPasswordl : {
         required : true,
@@ -234,14 +234,14 @@ $(document).ready(function() {
       },
     },
   });
-  
+
     //pwv=false;
     //alert(pwv);
-  
+
   //添加自定义验证规则
   jQuery.validator.addMethod("umPhone", function(value, element) {
     var length = value.length;
-    var umPhone = /^(1[3578]{1}[0-9]{9})$/
+    var umPhone = /^(1[35678]{1}[0-9]{9})$/
     return this.optional(element) || (length == 11 && umPhone.test(value));
   }, "手机号码格式错误");
 //this.optional(element)用于表单控件的值不为空时才触发验证。
@@ -268,7 +268,7 @@ $(document).ready(function() {
         }
       });
     });
-    
+
   //return true;
     //alert(pwv);
     return pwv;//true不显示错误，false显示错误
@@ -281,10 +281,10 @@ $(document).ready(function() {
     return this.optional(element) || (umEmail.test(value));
   }, "邮箱格式错误");
 
-  /*jQuery.validator.addMethod("vcode", function(value, element) { 
-    var length = value.length; 
+  /*jQuery.validator.addMethod("vcode", function(value, element) {
+    var length = value.length;
     var vcode = /^([a-zA-Z_0-9]{1,}@[a-zA-Z0-9]{1,}(.[a-zA-Z]{1,}){1,})$/
-    return this.optional(element) ||(vcode.test(value)); 
+    return this.optional(element) ||(vcode.test(value));
   }, "验证码错误");*/
   jQuery.validator.addMethod("umIdentifyNum", function(value, element) {
     var length = value.length;

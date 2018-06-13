@@ -113,11 +113,12 @@ new Vue({
       })
     },
     questionStatisc: function() {
+
       this.modelTitle = this.items[0].examTitle;
       var myLineChart = echarts.init(document.getElementById('optionPieChar'));
       optionLine = {
         title: {
-          text: '本问卷信息统计',
+          text: '最近七天问答量统计',
           left: 'center'
         },
         tooltip: {
@@ -162,7 +163,7 @@ new Vue({
         dataType: 'JSON',
         data: {examId: localStorage.getItem("examId")},
         success: function(result) {
-          for (var i = 0; i<result.length; i++) {
+          for (var i = 6; i >= 0; i--) {
             optionLine.xAxis.data.push(result[i].testDate);
             optionLine.series[0].data.push(result[i].total);
           }
@@ -224,8 +225,6 @@ new Vue({
             optionBar.xAxis.data.push(result[i].scoreArea);
             optionBar.series[0].data.push(result[i].counts);
           }
-          console.log(optionBar.xAxis.data)
-          console.log(optionBar.series[0].data)
           myBarChart.setOption(optionBar);
         },
       })

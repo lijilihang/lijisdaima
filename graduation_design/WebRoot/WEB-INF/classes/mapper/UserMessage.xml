@@ -10,6 +10,7 @@
         <result column="u_email" property="umEmail"/>
         <result column="u_address" property="umAddress"/>
         <result column="u_birthday" property="umBirthday"/>
+        <result column="u_photo_path" property="umPhotoPath"/>
     </resultMap>
     
     <resultMap type="com.etimeci.ssm.entity.UserMessage" id="realNameMap">
@@ -38,7 +39,8 @@
             u_phone,
             u_email,
             u_address,
-            u_birthday
+            u_birthday,
+            u_photo_path
         from z_user
         <where>
              u_id = #{userId}

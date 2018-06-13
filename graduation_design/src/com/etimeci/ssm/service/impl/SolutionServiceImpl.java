@@ -95,4 +95,9 @@ public class SolutionServiceImpl implements SolutionService {
     public int selectScoreCount(Integer examId, Float stratScore, Float endScore) {
         return solutionDao.selectScoreCount(examId, stratScore, endScore);
     }
+
+    @Override
+    public Boolean updateImage(Integer userId, String imagePath) {
+        return solutionDao.updateImage(userId, imagePath);
+    }
 }

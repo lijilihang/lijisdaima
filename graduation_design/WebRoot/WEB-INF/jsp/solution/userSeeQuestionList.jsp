@@ -94,7 +94,8 @@
               <span class="req">*</span>
               <span class="qtypetip" v-if="item.type == 'checkbox'">&nbsp;[多选题]</span>
               <span class="qtypetip" v-if="item.type == 'textArea'">&nbsp;[填空题]</span>
-              <img alt="" title="问题统计 " class="piePictrue" @click="optionStatisc(item.title,item.type,item.index)" src="css/question/images/pie.png" data-toggle="modal" data-target="#myModal">
+              <img alt="" title="问题统计 " v-if="item.type != 'textArea'" class="piePictrue" @click="optionStatisc(item.title,item.type,item.index)" src="css/question/images/pie.png" data-toggle="modal" data-target="#myModal">
+              <img alt="" title="问题统计 " v-if="item.type == 'textArea'" class="piePictrue" @click="" src="css/question/images/list.png" data-toggle="modal" data-target="#myModal">
             </div>
             <div class="ui-controlgroup">
 
@@ -175,15 +176,7 @@
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
   </form>
-  
-  
-  
 
-
-
-  
-  
-  
   
 <script type="text/javascript">
   window.getQuestionListPath = "${pageContext.request.contextPath }/getUserSeeQuestionList";
@@ -191,7 +184,7 @@
   window.getOptionNumPath = "${pageContext.request.contextPath }/getOptionNum";
   window.getTestScoreTotalPath = "${pageContext.request.contextPath }/getTestScoreTotal";
   window.getLineChartMessagePath = "${pageContext.request.contextPath }/getLineChartMessage";
-  </script>
+</script>
 <script type="text/javascript" src="js/question/userSeeQuestionList.js"></script>
 </body>
 </html>
