@@ -163,7 +163,13 @@ new Vue({
         dataType: 'JSON',
         data: {examId: localStorage.getItem("examId")},
         success: function(result) {
-          for (var i = 6; i >= 0; i--) {
+          let k = 0;
+          if (result.length < 7) {
+            k = result.length - 1;
+          } else {
+            k = 6;
+          }
+          for (i = k; i >= 0; i--) {
             optionLine.xAxis.data.push(result[i].testDate);
             optionLine.series[0].data.push(result[i].total);
           }

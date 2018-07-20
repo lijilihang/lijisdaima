@@ -32,6 +32,7 @@ new Vue({
     },
     changeUserMessage: function() {
       var vueBody = this;
+      console.log(this.userBirthday)
       $.ajax({
         url: changeUserMessagePath,
         type: 'POST',
@@ -95,5 +96,8 @@ new Vue({
         },
       })
     },
+    triggerChoosePictrue: function() {
+      $("#choosePictures ").trigger("click");
+    }
   }
 })

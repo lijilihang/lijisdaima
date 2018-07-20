@@ -11,6 +11,7 @@ public class TestDynamic {
         Class<?> classType = handler.getClass();
         Subject subject = (Subject) Proxy.newProxyInstance(classType.getClassLoader(), realSubject.getClass().getInterfaces(), handler);
         subject.request("liji", 1);
+        subject.response(5);
     }
 
 }

@@ -166,7 +166,7 @@ $(window).load(function() {
 		   <input type="file" name="file" title="" @change="onPictureChange" id="choosePictures" class="choose"/>&#xe62f;</i>
 
 		 </div>
-		 <img v-if="imagePath != ''" v-bind:src="imagePath" title="修改头像" class="myImage"  />
+		 <img v-if="imagePath != ''" v-bind:src="imagePath" @click="triggerChoosePictrue" title="修改头像" class="myImage" id="triggerMyImage" />
 		 <div v-if="imagePath == ''">修改头像</div>
 		 </div>
 

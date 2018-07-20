@@ -7,4 +7,9 @@ public class RealSubject implements Subject {
         System.out.println("我是真实角色" + s);
     }
 
+    @Override
+    public int response(int f) {
+        return f;
+    }
+
 }
