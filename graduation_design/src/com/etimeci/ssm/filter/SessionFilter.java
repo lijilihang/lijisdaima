@@ -34,7 +34,9 @@ public class SessionFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         String uri = request.getRequestURI();
+        System.out.println(uri + "........uri");
         String requestedUri = uri.substring(request.getContextPath().length() + 1);
+        System.out.println(requestedUri + ".......requestUri");
 
         if (requestedUri.endsWith(".css") || requestedUri.endsWith(".js") || requestedUri.endsWith(".png") || requestedUri.endsWith(".jpg")) {
             filterChain.doFilter(request, response);

@@ -20,5 +20,4 @@ public class VolatileSingleton {
 
         return vsingleton;
     }
-
 }

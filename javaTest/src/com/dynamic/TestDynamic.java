@@ -13,5 +13,4 @@ public class TestDynamic {
         subject.request("liji", 1);
         subject.response(5);
     }
-
 }
